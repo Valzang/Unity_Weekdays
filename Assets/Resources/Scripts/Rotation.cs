@@ -95,41 +95,7 @@ public class Rotation : MonoBehaviour
     }
 
     void Input_Rotate()
-    {       
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            float rot = speed * Time.deltaTime;
-            Vector3 UpTarget = this.transform.position;
-            UpTarget.y += 2;
-            Vector3 dirToTarget = UpTarget - this.transform.position;
-            dirToTarget = dirToTarget.normalized;
-            //print("ÁÂÃø y°¢µµ : " + FrontAxis.transform.rotation.eulerAngles.y);
-
-            float Y_Angle = FrontAxis.transform.rotation.eulerAngles.y;
-            Y_Angle += (Y_Angle > 180 ? -360 : 0);
-
-            if (Y_Angle > -30.0f)
-                FrontAxis.transform.Rotate(new Vector3(0, -rot, 0));
-        }
-
-        if (Input.GetKey(KeyCode.D))
-        {
-            float rot = speed * Time.deltaTime;
-            Vector3 UpTarget = this.transform.position;
-            UpTarget.y += 2;
-            Vector3 dirToTarget = UpTarget - this.transform.position;
-            dirToTarget = dirToTarget.normalized;
-
-            float Y_Angle = FrontAxis.transform.rotation.eulerAngles.y;
-            Y_Angle += (Y_Angle > 180 ? -360 : 0);
-
-            if (Y_Angle < 30.0f)
-                FrontAxis.transform.Rotate(new Vector3(0, rot, 0));
-            //FrontAxis.transform.Rotate(dirToTarget, rot, Space.Self);
-
-
-        }
+    {               
 
         if (Input.GetKey(KeyCode.S))
         {

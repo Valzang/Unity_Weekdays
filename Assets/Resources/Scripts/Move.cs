@@ -51,11 +51,11 @@ public class Move : MonoBehaviour
             transform.Translate(Vector3.forward * moveDelta);
             if (Input.GetKey(KeyCode.A))
             {
-                transform.Rotate(new Vector3(0, -2 * moveDelta, 0));
+                transform.Rotate(new Vector3(0, -3 * moveDelta, 0));
             }
             if (Input.GetKey(KeyCode.D))
             {
-                transform.Rotate(new Vector3(0, 2 * moveDelta, 0));
+                transform.Rotate(new Vector3(0, 3 * moveDelta, 0));
             }
         }
         if (Input.GetKey(KeyCode.S))
@@ -64,11 +64,11 @@ public class Move : MonoBehaviour
             transform.Translate(Vector3.back * moveDelta);
             if (Input.GetKey(KeyCode.A))
             {
-                transform.Rotate(new Vector3(0, 2 * moveDelta, 0));
+                transform.Rotate(new Vector3(0, 3 * moveDelta, 0));
             }
             if (Input.GetKey(KeyCode.D))
             {
-                transform.Rotate(new Vector3(0, -2 * moveDelta, 0));
+                transform.Rotate(new Vector3(0, -3 * moveDelta, 0));
             }
         }
     }        
