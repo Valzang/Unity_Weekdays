@@ -5,6 +5,7 @@ using UnityEngine;
 public class Rotation_Front_Wheel : MonoBehaviour
 {
     public GameObject OtherAxis = null;
+    float moveSpeed = 150.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -15,7 +16,7 @@ public class Rotation_Front_Wheel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float rot = 150.0f * Time.deltaTime;
+        float rot = moveSpeed * Time.deltaTime;
         Vector3 UpTarget = OtherAxis.transform.position;        
         UpTarget.y += 2;
         Vector3 dirToTarget = UpTarget - OtherAxis.transform.position;
@@ -23,7 +24,8 @@ public class Rotation_Front_Wheel : MonoBehaviour
         
         float Y_Angle = OtherAxis.transform.localRotation.eulerAngles.y;
         Y_Angle += (Y_Angle > 180 ? -360 : 0);
-        //print("Y_Angle : " + Y_Angle);
+        
+
         if (Input.GetKey(KeyCode.A) && Y_Angle > -30.0f)
         {
             OtherAxis.transform.Rotate(dirToTarget, -rot, Space.Self);          

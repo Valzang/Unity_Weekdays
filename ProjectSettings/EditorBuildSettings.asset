@@ -6,6 +6,21 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Resources/Scenes/Study/00 Start.unity
+    guid: 3320f47aecc1a164ab5f54d590290d2f
+  - enabled: 1
+    path: Assets/Resources/Scenes/Study/01 Move&Rotation.unity
+    guid: 3ae0d9c459db3454092504e283e4143f
+  - enabled: 1
+    path: Assets/Resources/Scenes/Study/02 OnGUI_SceneManagement.unity
+    guid: 8e1648e28c1254341b916afa224f5a3e
+  - enabled: 1
+    path: Assets/Resources/Scenes/Study/03 Game.unity
+    guid: 8fdc0af5f7cffe247a3dd435a7418aa9
+  - enabled: 1
+    path: Assets/Resources/Scenes/Study/99 End.unity
+    guid: 7d7228554ff6c614381fef68372a9c06
+  - enabled: 1
     path: Assets/Resources/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   m_configObjects: {}
