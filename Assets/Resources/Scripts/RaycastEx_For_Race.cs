@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RaycastEx : MonoBehaviour
+public class RaycastEx_For_Race : MonoBehaviour
 {
     [Range(0, 50)]
     public float distance = 10.0f;
@@ -23,9 +23,9 @@ public class RaycastEx : MonoBehaviour
     void Update()
     {
         ray = new Ray(this.transform.position, this.transform.forward);
-        //Ray_1();
+        Ray_1();
         //Ray_2();
-        Ray_2();
+        //Ray_2();
     }
 
     // 광선에 닿은 단일 개체 체크
@@ -33,7 +33,8 @@ public class RaycastEx : MonoBehaviour
     {
         if(Physics.Raycast(ray, out rayHit, distance))
         {
-            Debug.Log(rayHit.collider.gameObject.name + " " + rayHit.distance);            
+            if (rayHit.collider.gameObject.tag != "Obstacle")
+                Debug.Log(rayHit.collider.gameObject.name + " " + rayHit.distance);            
         }
     }
 
@@ -96,37 +97,33 @@ public class RaycastEx : MonoBehaviour
 
     void OnDrawGizmos_2()
     {
-        Debug.DrawRay(ray.origin, ray.direction * distance, Color.red);
+        //Debug.DrawRay(ray.origin, ray.direction * distance, Color.red);
 
         // 원점
         Gizmos.color = new Color32(255, 255, 0, 255);
         Gizmos.DrawSphere(ray.origin, 0.1f);
 
-        if (rayHits != null)
-        {
-            for (int i=0; i< rayHits.Length; ++i)
-            {
-                if (rayHits[i].collider != null)
-                {
-                    Gizmos.color = Color.red;
-                    Gizmos.DrawSphere(rayHits[i].point, 0.1f);
+        // 충돌 범위
+        //Gizmos.color = new Color32(255, 255, 0, 255);
+        //Gizmos.DrawWireSphere(ray.origin, distance);
 
-                    // 충돌한 포인트까지
-                    Gizmos.color = Color.cyan;
-                    Gizmos.DrawLine(transform.position, 
-                        transform.position + transform.forward * rayHits[i].distance);
 
-                    // Normal
-                    Gizmos.color = Color.magenta;
-                    Gizmos.DrawLine(rayHits[i].point, rayHits[i].point + rayHits[i].normal);
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(rayHit.point, 0.1f);
 
-                    // Reflect
-                    Gizmos.color = Color.white;
-                    Vector3 reflect = Vector3.Reflect(this.transform.forward, rayHits[i].normal);
-                    Gizmos.DrawLine(rayHits[i].point, rayHits[i].point + reflect);
-                    
-                }
-            }            
-        }
+        // 충돌한 포인트까지
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawLine(transform.position,
+            transform.position + transform.forward * rayHit.distance);
+
+        // Normal
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawLine(rayHit.point, rayHit.point + rayHit.normal);
+
+        // Reflect
+        Gizmos.color = Color.white;
+        Vector3 reflect = Vector3.Reflect(this.transform.forward, rayHit.normal);
+        Gizmos.DrawLine(rayHit.point, rayHit.point + reflect);
+
     }
 }
