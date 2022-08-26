@@ -64,6 +64,11 @@ public class Heli_Move : MonoBehaviour
             {
                 OtherAxis.transform.Rotate(0, 0, -moveDelta * 4.0f, Space.Self);
             }
+            else
+            {
+                float ToZero2 = Z_Angle > 0 ? moveDelta * -7.0f : moveDelta * 7.0f;
+                OtherAxis.transform.Rotate(0, 0, ToZero2, Space.Self);
+            }
         }
         else if (Input.GetKey(KeyCode.S))
         {
@@ -79,6 +84,11 @@ public class Heli_Move : MonoBehaviour
             else if (Input.GetKey(KeyCode.D) && Z_Angle > -30.0f)
             {
                 OtherAxis.transform.Rotate(0, 0, -moveDelta * 4.0f, Space.Self);
+            }
+            else
+            {
+                float ToZero2 = Z_Angle > 0 ? moveDelta * -7.0f : moveDelta * 7.0f;
+                OtherAxis.transform.Rotate(0, 0, ToZero2, Space.Self);
             }
         }
         else

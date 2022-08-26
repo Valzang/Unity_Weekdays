@@ -16,9 +16,11 @@ public class Heli_Rotate_Blade : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 UpTarget = OtherAxis.transform.localPosition;
+        //Vector3 UpTarget = OtherAxis.transform.localPosition;
+        Vector3 UpTarget = transform.localPosition;
         UpTarget.y += 2;
-        Vector3 dirToTarget = UpTarget - OtherAxis.transform.localPosition;
+        //Vector3 dirToTarget = UpTarget - OtherAxis.transform.localPosition;
+        Vector3 dirToTarget = UpTarget - transform.localPosition;
         dirToTarget = dirToTarget.normalized;
 
         float rot = speed * Time.deltaTime * 5;
