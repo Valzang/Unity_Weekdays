@@ -78,8 +78,6 @@ public class Move_Ray6 : MonoBehaviour
 
         // ======================================================
 
-
-
         ray_F_L = new Ray(F_LeftSensor.transform.position, F_LeftSensor.transform.forward);
         ray_F_R = new Ray(F_RightSensor.transform.position, F_RightSensor.transform.forward);
         ray_F = new Ray(FrontSensor.transform.position, FrontSensor.transform.forward);
@@ -221,13 +219,7 @@ public class Move_Ray6 : MonoBehaviour
                 break;
             case (int)Solution.F_R:
                 break;
-        }
-
-        if (FallBack == (int)Solution.Nothing)
-        {
-            
-        }
-        
+        }        
         
     }
 
