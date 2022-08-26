@@ -31,11 +31,12 @@ public class RaycastEx_For_Race : MonoBehaviour
     // 광선에 닿은 단일 개체 체크
     void Ray_1()
     {
-        if(Physics.Raycast(ray, out rayHit, distance))
-        {
-            if (rayHit.collider.gameObject.tag == "Obstacle")
-                Debug.Log(this.name + "의 광선이 " + rayHit.collider.gameObject.name + " " + rayHit.distance + " 거리에서 충돌");            
-        }
+        Physics.Raycast(ray, out rayHit, distance);
+        //if (Physics.Raycast(ray, out rayHit, distance))
+        //{
+        //    //if (rayHit.collider.gameObject.tag == "Obstacle")
+        //    //    Debug.Log(this.name + "의 광선이 " + rayHit.collider.gameObject.name + " " + rayHit.distance + " 거리에서 충돌");            
+        //}
     }
 
     // 광선에 닿아있는 여러 개체 체크
