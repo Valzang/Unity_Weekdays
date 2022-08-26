@@ -709,6 +709,7 @@ GameObject:
   - component: {fileID: 7042071524001451537}
   - component: {fileID: 7042071524001451536}
   - component: {fileID: 7042071524001451543}
+  - component: {fileID: 3407871222017273233}
   m_Layer: 0
   m_Name: Truck_With_Sensor
   m_TagString: Untagged
@@ -757,7 +758,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7042071524001451542}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0c1eb679805176448a4204747e43227d, type: 3}
   m_Name: 
@@ -770,7 +771,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7042071524001451542}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6abbe62c0df9b6642899acc5f4632625, type: 3}
   m_Name: 
@@ -781,6 +782,19 @@ MonoBehaviour:
   Wheel_Right: {fileID: 7042071525550969557}
   Wheel_BLeft: {fileID: 7042071524754670675}
   Wheel_BRight: {fileID: 7042071523677543049}
+--- !u!114 &3407871222017273233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7042071524001451542}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c310267dd3aa3a4eb7480cb02dd463b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: 100
 --- !u!1 &7042071524049548680
 GameObject:
   m_ObjectHideFlags: 0

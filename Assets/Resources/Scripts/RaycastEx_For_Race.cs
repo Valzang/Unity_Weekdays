@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RaycastEx_For_Race : MonoBehaviour
 {
-    [Range(0, 50)]
+    [Range(0, 100)]
     public float distance = 10.0f;
     private RaycastHit rayHit;
     private RaycastHit[] rayHits;
@@ -33,8 +33,8 @@ public class RaycastEx_For_Race : MonoBehaviour
     {
         if(Physics.Raycast(ray, out rayHit, distance))
         {
-            if (rayHit.collider.gameObject.tag != "Obstacle")
-                Debug.Log(rayHit.collider.gameObject.name + " " + rayHit.distance);            
+            if (rayHit.collider.gameObject.tag == "Obstacle")
+                Debug.Log(this.name + "의 광선이 " + rayHit.collider.gameObject.name + " " + rayHit.distance + " 거리에서 충돌");            
         }
     }
 
