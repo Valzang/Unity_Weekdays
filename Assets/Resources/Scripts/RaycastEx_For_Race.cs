@@ -14,18 +14,15 @@ public class RaycastEx_For_Race : MonoBehaviour
     void Start()
     {
         ray = new Ray(this.transform.position, this.transform.forward);
-        //ray.origin = this.transform.position;
-        //ray.direction = this.transform.forward;
-        //ray = new Ray(ray.origin, ray.direction);
     }
 
     // Update is called once per frame
     void Update()
     {
-        ray = new Ray(this.transform.position, this.transform.forward);
+        //ray = new Ray(this.transform.position, this.transform.forward);
+        ray.origin = this.transform.position;
+        ray.direction = this.transform.forward;
         Ray_1();
-        //Ray_2();
-        //Ray_2();
     }
 
     // 광선에 닿은 단일 개체 체크
@@ -34,8 +31,8 @@ public class RaycastEx_For_Race : MonoBehaviour
         Physics.Raycast(ray, out rayHit, distance);
         //if (Physics.Raycast(ray, out rayHit, distance))
         //{
-        //    //if (rayHit.collider.gameObject.tag == "Obstacle")
-        //    //    Debug.Log(this.name + "의 광선이 " + rayHit.collider.gameObject.name + " " + rayHit.distance + " 거리에서 충돌");            
+        //    if (rayHit.collider.gameObject.tag != "Obstacle")
+        //        Debug.Log(this.name + "의 광선이 " + rayHit.collider.gameObject.name + " " + rayHit.distance + " 거리에서 충돌");            
         //}
     }
 
@@ -98,8 +95,8 @@ public class RaycastEx_For_Race : MonoBehaviour
 
     void OnDrawGizmos_2()
     {
-        //Debug.DrawRay(ray.origin, ray.direction * distance, Color.red);
-
+        if (rayHit.collider == null)
+            return;
         // 원점
         Gizmos.color = new Color32(255, 255, 0, 255);
         Gizmos.DrawSphere(ray.origin, 0.1f);
