@@ -1,12 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Move_Ray6 : MonoBehaviour
 {
     [SerializeField]
     [Range(0,100)]
-    public float moveSpeed = 10.0f;
+    public float moveSpeed = 20.0f;
 
     [Range(0, 200)]
     public float Sensor_Distance = 200.0f;
@@ -21,7 +23,6 @@ public class Move_Ray6 : MonoBehaviour
     public GameObject BackSensor = null;
     public GameObject B_LeftSensor = null;
     public GameObject B_RightSensor = null;
-
 
     public GameObject Wheel_Left = null;
     public GameObject Wheel_Right = null;
@@ -47,14 +48,40 @@ public class Move_Ray6 : MonoBehaviour
 
     private enum Solution { F_L, F_R, B_L, B_R, Nothing };
 
-    private int FallBack = (int)Solution.Nothing;
+    private int FallBack;
+
+
+    void Start()
+    {
+        FallBack = (int)Solution.Nothing;
+        ray_F_L = new Ray(F_LeftSensor.transform.position, F_LeftSensor.transform.forward);
+        ray_F_R = new Ray(F_RightSensor.transform.position, F_RightSensor.transform.forward);
+        ray_F = new Ray(FrontSensor.transform.position, FrontSensor.transform.forward);
+        ray_B = new Ray(BackSensor.transform.position, BackSensor.transform.forward);
+        ray_B_L = new Ray(B_LeftSensor.transform.position, B_LeftSensor.transform.forward);
+        ray_B_R = new Ray(B_RightSensor.transform.position, B_RightSensor.transform.forward);
+    }
 
     // Update is called once per frame
     void Update()
     {
+        SetRay(ref ray_F_L, F_LeftSensor);
+        SetRay(ref ray_F_R, F_RightSensor);
+        SetRay(ref ray_F, FrontSensor);
+        SetRay(ref ray_B, BackSensor);
+        SetRay(ref ray_B_L, B_LeftSensor);
+        SetRay(ref ray_B_R, B_RightSensor);
+
+        rayHit_F_L = Physics.RaycastAll(ray_F_L, Sensor_Distance).OrderBy(h => h.distance).Where(h => h.transform.tag == "Obstacle").FirstOrDefault();
+        //rayHit_F_L = Physics.RaycastAll(ray_F_L, Sensor_Distance);
+        rayHit_F_R = Physics.RaycastAll(ray_F_R, Sensor_Distance).OrderBy(h => h.distance).Where(h => h.transform.tag == "Obstacle").FirstOrDefault();
+        rayHit_F = Physics.RaycastAll(ray_F, FB_Sensor_Distance).OrderBy(h => h.distance).Where(h => h.transform.tag == "Obstacle").FirstOrDefault();
+        rayHit_B = Physics.RaycastAll(ray_B, FB_Sensor_Distance).OrderBy(h => h.distance).Where(h => h.transform.tag == "Obstacle").FirstOrDefault();
+        rayHit_B_L = Physics.RaycastAll(ray_B_L, Sensor_Distance).OrderBy(h => h.distance).Where(h => h.transform.tag == "Obstacle").FirstOrDefault();
+        rayHit_B_R = Physics.RaycastAll(ray_B_R, Sensor_Distance).OrderBy(h => h.distance).Where(h => h.transform.tag == "Obstacle").FirstOrDefault();
         Ray_Move();
-    }
-    
+    }       
+
     void Ray_Move()
     {
         float moveDelta = moveSpeed * Time.deltaTime;
@@ -76,30 +103,16 @@ public class Move_Ray6 : MonoBehaviour
          float Y_Angle = OtherAxis_L.transform.localRotation.eulerAngles.y;
         Y_Angle += (Y_Angle > 180 ? -360 : 0);
 
-        // ======================================================
+        // ======================================================       
 
-        ray_F_L = new Ray(F_LeftSensor.transform.position, F_LeftSensor.transform.forward);
-        ray_F_R = new Ray(F_RightSensor.transform.position, F_RightSensor.transform.forward);
-        ray_F = new Ray(FrontSensor.transform.position, FrontSensor.transform.forward);
-        ray_B = new Ray(BackSensor.transform.position, BackSensor.transform.forward);
-        ray_B_L = new Ray(B_LeftSensor.transform.position, B_LeftSensor.transform.forward);
-        ray_B_R = new Ray(B_RightSensor.transform.position, B_RightSensor.transform.forward);
-        Physics.Raycast(ray_F_L, out rayHit_F_L, Sensor_Distance);
-        Physics.Raycast(ray_F_R, out rayHit_F_R, Sensor_Distance);
-        Physics.Raycast(ray_F, out rayHit_F, Sensor_Distance);
-        Physics.Raycast(ray_B, out rayHit_B, Sensor_Distance);
-        Physics.Raycast(ray_B_L, out rayHit_B_L, Sensor_Distance);
-        Physics.Raycast(ray_B_R, out rayHit_B_R, Sensor_Distance);
-
-        //print("좌측 센서 감지된 거리 : " + rayHit_F_L.distance + "\n" + "우측 센서 감지된 거리 : " + rayHit_F_R.distance);
-                
-
-        switch(FallBack)
+        switch (FallBack)
         {
             case (int)Solution.Nothing:
                 {
                     // 앞 좌우 판정 =======================================================
 
+                    //print("정면 좌측 센서 :" + rayHit_F_L.distance);
+                    //print("정면 우측 센서 :" + rayHit_F_R.distance);
                     if (rayHit_F_L.distance < rayHit_F_R.distance)
                     {
                         //우회전
@@ -129,36 +142,31 @@ public class Move_Ray6 : MonoBehaviour
                     }
 
                     // 정면으로 쏜 센서가 특정 거리 미만일 때 ===========================================
-                    if (rayHit_F.distance < FB_Sensor_Distance)
-                    {
-                        // 후진
-                        transform.Translate(Vector3.back * moveDelta * 2);
+                    //if(rayHit_F.distance != 0.0f
+                    //    && rayHit_F.distance < FB_Sensor_Distance)
+                    //{
+                    //    // 후진
+                    //    transform.Translate(Vector3.back * moveDelta * 2);
 
-                        // 바퀴들 후진
-                        Wheel_Left.transform.Rotate(0, -rot, 0, Space.Self);
-                        Wheel_Right.transform.Rotate(0, -rot, 0, Space.Self);
-                        Wheel_BLeft.transform.Rotate(0, -rot, 0, Space.Self);
-                        Wheel_BRight.transform.Rotate(0, -rot, 0, Space.Self);
+                    //    // 바퀴들 후진
+                    //    Wheel_Left.transform.Rotate(0, -rot, 0, Space.Self);
+                    //    Wheel_Right.transform.Rotate(0, -rot, 0, Space.Self);
+                    //    Wheel_BLeft.transform.Rotate(0, -rot, 0, Space.Self);
+                    //    Wheel_BRight.transform.Rotate(0, -rot, 0, Space.Self);
 
-                        if (rayHit_B_L.distance < rayHit_B_R.distance)
-                        {
-                            FallBack = (int)Solution.B_L;
-                            break;
-                        }
-                        else if (rayHit_B_L.distance > rayHit_B_R.distance)
-                        {
-                            FallBack = (int)Solution.B_R;
-                            break;
-                            //transform.Rotate(new Vector3(0, -5 * moveDelta * 2, 0));
-                            //if (Y_Angle < 30.0f)
-                            //{
-                            //    OtherAxis_L.transform.Rotate(dirToTarget_L, rot, Space.Self);
-                            //    OtherAxis_R.transform.Rotate(dirToTarget_R, rot, Space.Self);
-                            //}
-                        }
+                    //    if (rayHit_B_L.distance < rayHit_B_R.distance)
+                    //    {
+                    //        FallBack = (int)Solution.B_L;
+                    //        break;
+                    //    }
+                    //    else if (rayHit_B_L.distance > rayHit_B_R.distance)
+                    //    {
+                    //        FallBack = (int)Solution.B_R;
+                    //        break;
+                    //    }
 
-                    }
-                    else
+                    //}
+                    //else
                     {
                         // 앞으로 전진
                         transform.Translate(Vector3.forward * moveDelta);
@@ -173,47 +181,50 @@ public class Move_Ray6 : MonoBehaviour
                 break;
 
             case (int)Solution.B_L:
-                // 후진
-                transform.Translate(Vector3.back * moveDelta);
-
-                // 바퀴들 후진
-                Wheel_Left.transform.Rotate(0, -rot, 0, Space.Self);
-                Wheel_Right.transform.Rotate(0, -rot, 0, Space.Self);
-                Wheel_BLeft.transform.Rotate(0, -rot, 0, Space.Self);
-                Wheel_BRight.transform.Rotate(0, -rot, 0, Space.Self);
-
-                transform.Rotate(new Vector3(0, 7 * moveDelta, 0));
-                if (Y_Angle < 30.0f)
                 {
-                    OtherAxis_L.transform.Rotate(dirToTarget_L, rot, Space.Self);
-                    OtherAxis_R.transform.Rotate(dirToTarget_R, rot, Space.Self);
+                    // 후진
+                    transform.Translate(Vector3.back * moveDelta);
+
+                    // 바퀴들 후진
+                    Wheel_Left.transform.Rotate(0, -rot, 0, Space.Self);
+                    Wheel_Right.transform.Rotate(0, -rot, 0, Space.Self);
+                    Wheel_BLeft.transform.Rotate(0, -rot, 0, Space.Self);
+                    Wheel_BRight.transform.Rotate(0, -rot, 0, Space.Self);
+
+                    transform.Rotate(new Vector3(0, 7 * moveDelta, 0));
+                    if (Y_Angle < 30.0f)
+                    {
+                        OtherAxis_L.transform.Rotate(dirToTarget_L, rot, Space.Self);
+                        OtherAxis_R.transform.Rotate(dirToTarget_R, rot, Space.Self);
+                    }
+
+                    if (rayHit_B.distance != 0.0f
+                        && rayHit_B.distance <= FB_Sensor_Distance)
+                        FallBack = (int)Solution.Nothing;
                 }
-
-                
-
-                if (rayHit_B.distance <= FB_Sensor_Distance)
-                    FallBack = (int)Solution.Nothing;
-
                 break;
             case (int)Solution.B_R:
-                // 후진
-                transform.Translate(Vector3.back * moveDelta);
-
-                // 바퀴들 후진
-                Wheel_Left.transform.Rotate(0, -rot, 0, Space.Self);
-                Wheel_Right.transform.Rotate(0, -rot, 0, Space.Self);
-                Wheel_BLeft.transform.Rotate(0, -rot, 0, Space.Self);
-                Wheel_BRight.transform.Rotate(0, -rot, 0, Space.Self);
-
-                transform.Rotate(new Vector3(0, -7 * moveDelta, 0));
-                if (Y_Angle > -30.0f)
                 {
-                    OtherAxis_L.transform.Rotate(dirToTarget_L, -rot, Space.Self);
-                    OtherAxis_R.transform.Rotate(dirToTarget_R, -rot, Space.Self);
-                }
+                    // 후진
+                    transform.Translate(Vector3.back * moveDelta);
 
-                if (rayHit_B.distance <= FB_Sensor_Distance)
-                    FallBack = (int)Solution.Nothing;
+                    // 바퀴들 후진
+                    Wheel_Left.transform.Rotate(0, -rot, 0, Space.Self);
+                    Wheel_Right.transform.Rotate(0, -rot, 0, Space.Self);
+                    Wheel_BLeft.transform.Rotate(0, -rot, 0, Space.Self);
+                    Wheel_BRight.transform.Rotate(0, -rot, 0, Space.Self);
+
+                    transform.Rotate(new Vector3(0, -7 * moveDelta, 0));
+                    if (Y_Angle > -30.0f)
+                    {
+                        OtherAxis_L.transform.Rotate(dirToTarget_L, -rot, Space.Self);
+                        OtherAxis_R.transform.Rotate(dirToTarget_R, -rot, Space.Self);
+                    }
+
+                    if (rayHit_B.distance != 0.0f
+                        && rayHit_B.distance <= FB_Sensor_Distance)
+                        FallBack = (int)Solution.Nothing;
+                }                
                 break;
             case (int)Solution.F_L:
                 break;
@@ -221,6 +232,28 @@ public class Move_Ray6 : MonoBehaviour
                 break;
         }        
         
+    }    
+
+    private void SetRay(ref Ray _Ray, GameObject _Sensor)
+    {
+        _Ray.origin = _Sensor.transform.position;
+        _Ray.direction = _Sensor.transform.forward;
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision != null && collision.gameObject.tag == "Car")
+        {            
+            moveSpeed = 10.0f;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision != null && collision.gameObject.tag == "Car")
+        {
+            moveSpeed = 20.0f;
+        }
     }
 
 }

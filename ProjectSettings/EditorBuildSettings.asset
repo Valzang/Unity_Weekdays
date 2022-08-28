@@ -23,4 +23,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Resources/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Resources/Scenes/Assignment/#2_Race_Circle.unity
+    guid: 331e505a45b85ee46a840ae7fc415b94
+  - enabled: 1
+    path: Assets/Resources/Scenes/Assignment/#2_Race_End.unity
+    guid: d6b891c0923c2824db49368842858b7e
+  - enabled: 1
+    path: Assets/Resources/Scenes/Assignment/#2_Race_Circle_Setting.unity
+    guid: 86dbf6ffab8e24b4fb083b4453bef025
   m_configObjects: {}

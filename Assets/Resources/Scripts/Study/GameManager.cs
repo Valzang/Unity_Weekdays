@@ -5,6 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public int gameScore = 0;
+    public int m_CarCount = 0;
+    public string[] m_Ranking = new string[1];
+    public double[] m_Ranking_Time = new double[1];
+    public int Enter_Order = 0;
+    public string userID = "";
+    public int Nth = 2;
+
     private static GameManager sInstance;
     public static GameManager Instance 
     { 
@@ -29,6 +37,4 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
-    public int gameScore = 0;
-    public string userID = "";
 }
