@@ -32,4 +32,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Resources/Scenes/Assignment/#2_Race_Circle_Setting.unity
     guid: 86dbf6ffab8e24b4fb083b4453bef025
+  - enabled: 1
+    path: Assets/Resources/Scenes/Assignment/#3_FlappyBird_Setting.unity
+    guid: c6327ec1e74a6c44db702407e1a39aa6
+  - enabled: 1
+    path: Assets/Resources/Scenes/Assignment/#3_FlappyBird_Game.unity
+    guid: ffd9c625cd786b240a3925ef066fcb19
+  - enabled: 1
+    path: Assets/Resources/Scenes/Assignment/#3_FlappyBird_Score.unity
+    guid: 052905bb2efbd2f4db9927b057a0e4c4
   m_configObjects: {}
