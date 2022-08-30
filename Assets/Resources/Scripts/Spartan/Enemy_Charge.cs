@@ -6,7 +6,7 @@ public class Enemy_Charge : MonoBehaviour
 {
     public GameObject swordCollider = null;
 
-    private float moveSpeed = 5.0f;
+    private float moveSpeed = 4.5f;
     private bool FrontofDefense = false;
     private bool isDead = false;
 
@@ -17,6 +17,8 @@ public class Enemy_Charge : MonoBehaviour
         enemy_Spartan = gameObject.GetComponentInChildren<Animation>();
         enemy_Spartan.wrapMode = WrapMode.Loop;
         enemy_Spartan.CrossFade("run", 0.3f);
+        moveSpeed += (float)SpartanGameManager.Instance.Difficulty * 0.2f;
+        print("현재 적 속도 : " + moveSpeed.ToString());
     }
 
     // Update is called once per frame
@@ -54,6 +56,8 @@ public class Enemy_Charge : MonoBehaviour
                     enemy_Spartan.CrossFade("idle", 0.3f);
                     break;
                 case "LINE":
+                    print("끝 도달");
+                    SpartanGameManager.Instance.ChangeScene("#4_Spartan_Ending");
                     Destroy(this.gameObject);
                     break;
             }

@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     private float runSpeed = 6.0f;
     Vector3 Velocity;
 
-    private float rotationSpeed = 360.0f;
+    //private float rotationSpeed = 360.0f;
     
 
 
@@ -151,7 +151,7 @@ public class PlayerController : MonoBehaviour
 
     private void Animation_Play_3()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F) || Input.GetMouseButton(0))
         {
             StartCoroutine("BackToIdle", "attack");
             //spartanKing.wrapMode = WrapMode.Once;
@@ -262,6 +262,10 @@ public class PlayerController : MonoBehaviour
             transform.Translate(Vector3.forward * runSpeed*2.0f * Time.deltaTime);
             spartanKing.CrossFade("run", 0.3f);
         }
+        else 
+        {
+            spartanKing.CrossFade("idle", 0.3f);
+        }
         if (Input.GetKey(KeyCode.A))
         {
             transform.Rotate(0.0f,-1.0f,0.0f);
@@ -269,11 +273,6 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.D))
         {
             transform.Rotate(0.0f,1.0f,0.0f);
-        }
-       
-        if (spartanKing.IsPlaying("run") != true)
-        {
-            spartanKing.CrossFade("idle", 0.3f);
         }
 
         /*
@@ -318,6 +317,12 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         transform.rotation = Quaternion.Euler(new Vector3(0.0f, transform.rotation.eulerAngles.y, 0.0f));
-        //transform.rotation.z
+    }
+    private void OnGUI()
+    {
+        GUIStyle temp = new GUIStyle();
+        temp.fontSize = 40;
+        GUI.Box(new Rect(10, 10, 200, 50), "해치운 적 : " + SpartanGameManager.Instance.DeadSpartan.ToString() + "/" + SpartanGameManager.Instance.TotalSpartan.ToString() + "명", temp);
+        GUI.Box(new Rect(10, 60, 200, 50), "현재 레벨 : " + SpartanGameManager.Instance.Difficulty.ToString(), temp);
     }
 }

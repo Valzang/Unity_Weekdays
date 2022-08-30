@@ -9,20 +9,46 @@ public class Spartan_Spawner : MonoBehaviour
 
     public int Total_Count = 5;
     public int Spawn_Count = 0;
+    private float PhaseCounter = 10.0f;
+    private bool isNewPhase = false;
 
     private void Start()
     {
-        InvokeRepeating("MakeObj", 1.0f, 4.0f);
+        Total_Count = SpartanGameManager.Instance.TotalSpartan;
+        InvokeRepeating("MakeObj", 1.0f, (4.0f - SpartanGameManager.Instance.Difficulty * 0.2f));
     }
+
+    private void OnGUI()
+    {
+        GUIStyle temp = new GUIStyle();
+        temp.fontSize = 40;
+        if (PhaseCounter < 10.0f)
+            GUI.Box(new Rect(10, 110, 200, 50), "새 페이즈까지 남은 시간 : " + (int)PhaseCounter + "초", temp);
+    }
+
     private void Update()
     {
+        if(isNewPhase)
+        {
+            PhaseCounter -= Time.deltaTime;
+            if(PhaseCounter <= 0.0f)
+            {
+                isNewPhase = false;
+                PhaseCounter = 10.0f;
+                InvokeRepeating("MakeObj", 0.0f, 4.0f - SpartanGameManager.Instance.Difficulty*0.2f);
+                print("현재 생성 속도 : " + (4.0f - SpartanGameManager.Instance.Difficulty * 0.2f).ToString());
+                ++SpartanGameManager.Instance.Difficulty;
+                SpartanGameManager.Instance.TotalSpartan += 2;
+                SpartanGameManager.Instance.DeadSpartan = 0;
+            }
+        }
         if (Spawn_Count == Total_Count)
         {
-            print("10초 후 새 페이즈를 시작합니다");
+            //print("10초 후 새 페이즈를 시작합니다");
             StopInvoke();
             Total_Count += 2;
             Spawn_Count = 0;
-            InvokeRepeating("MakeObj", 10.0f, 4.0f);
+            isNewPhase = true;
         }
     }
 
@@ -34,7 +60,7 @@ public class Spartan_Spawner : MonoBehaviour
 
     void MakeObj()
     {
-        if (Spawn_Count == Total_Count)
+        if (Spawn_Count >= Total_Count)
             return;
         GameObject obj = null;
         if (spartanObj != null)

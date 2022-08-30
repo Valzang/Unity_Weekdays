@@ -11,13 +11,19 @@ public class SwordCollide : MonoBehaviour
         {
             if (other.name != thisBody.name)
             {
-                print("other : " + other.name + " / this : " + thisBody.name);
                 Animation OtherSpartan = other.GetComponentInChildren<Animation>();
-                OtherSpartan.wrapMode = WrapMode.Once;
-                OtherSpartan.CrossFade("die", 0.3f);
+                if(!OtherSpartan.IsPlaying("die"))
+                {
+                    OtherSpartan.wrapMode = WrapMode.Once;
+                    OtherSpartan.CrossFade("die", 0.3f);
+                    this.gameObject.GetComponent<BoxCollider>().enabled = false;
+                    ++SpartanGameManager.Instance.DeadSpartan;
+                    ++SpartanGameManager.Instance.TotalDeadSpartan;
+                }
             }
         }
 
+        // 적이 장애물 부술때
         if (other.tag == "Obstacle" && thisBody.tag == "Enemy")
         {
             print("other : " + other.name + " / this : " + thisBody.name);
