@@ -5,18 +5,18 @@ using UnityEngine;
 public class BackGround_Move : MonoBehaviour
 {
 
-    private Renderer renderer;
+    private Renderer renderer_;
     public float offset = 0.0f;
     private Material mat;
 
     // Start is called before the first frame update
     private void Awake()
     {
-        this.renderer = this.GetComponent<Renderer>();
+        this.renderer_ = this.GetComponent<Renderer>();
     }
     void Start()
     {
-        mat = this.renderer.material;        
+        mat = this.renderer_.material;        
     }
 
     // Update is called once per frame
