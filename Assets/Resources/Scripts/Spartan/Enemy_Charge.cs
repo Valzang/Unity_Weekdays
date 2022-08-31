@@ -47,7 +47,7 @@ public class Enemy_Charge : MonoBehaviour
                 case "Obstacle":
                     FrontofDefense = true;
                     print("장애물 만나서 공격 시전");
-                    StartCoroutine("BackToRun");
+                    StartCoroutine(nameof(BackToRun));
                     Destroy(other.gameObject);
                     break;
                 case "Player":

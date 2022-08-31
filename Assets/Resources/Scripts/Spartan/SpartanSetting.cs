@@ -6,31 +6,36 @@ public class SpartanSetting : MonoBehaviour
 {
     private void OnGUI()
     {
-        GUI.Box(new Rect(Screen.width/2.0f-130.0f, Screen.height / 3.0f + 50.0f, 260, 50), "설정");
-        GUI.Box(new Rect(Screen.width / 2.0f - 130.0f, Screen.height / 3.0f + 100.0f, 50, 30), "난이도");
-        GUI.Box(new Rect(Screen.width / 2.0f - 80.0f, Screen.height / 3.0f + 100.0f, 150, 30), SpartanGameManager.Instance.Difficulty.ToString());
-        if (GUI.Button(new Rect(Screen.width / 2.0f + 70.0f, Screen.height / 3.0f + 100.0f, 30, 30), "<="))
+        GUIStyle style = new(GUI.skin.button);
+        style.normal.textColor = Color.yellow;
+        style.fontSize = 30;
+        style.alignment = TextAnchor.MiddleCenter;
+
+        GUIStyle style_box = new(GUI.skin.box);
+        style_box.normal.textColor = Color.yellow;
+        style_box.fontSize = 30;
+        style_box.alignment = TextAnchor.MiddleCenter;
+
+        GUI.Box(new Rect(Screen.width / 2.0f - 160.0f, Screen.height / 1.5f, 320, 50), "설정", style_box);
+        GUI.Box(new Rect(Screen.width / 2.0f - 160.0f, Screen.height / 1.5f + 50.0f, 120, 50), "난이도", style_box);
+        GUI.Box(new Rect(Screen.width / 2.0f - 40.0f, Screen.height / 1.5f + 50.0f, 80, 50), SpartanGameManager.Instance.Difficulty.ToString(), style_box);
+        if (GUI.Button(new Rect(Screen.width / 2.0f + 40.0f, Screen.height / 1.5f + 50.0f, 60, 50), "<=", style))
         {
             if (SpartanGameManager.Instance.Difficulty > 1)
                 --SpartanGameManager.Instance.Difficulty;
         }
 
-        if (GUI.Button(new Rect(Screen.width / 2.0f + 100.0f, Screen.height / 3.0f + 100.0f, 30, 30), "=>"))
+        if (GUI.Button(new Rect(Screen.width / 2.0f + 100.0f, Screen.height / 1.5f + 50.0f, 60, 50), "=>", style))
         {
             if (SpartanGameManager.Instance.Difficulty < 15)
                 ++SpartanGameManager.Instance.Difficulty;
         }
-        if (GUI.Button(new Rect(Screen.width / 2.0f - 130.0f, Screen.height / 3.0f+130.0f, 260, 50), "Game Start"))
+        if (GUI.Button(new Rect(Screen.width / 2.0f - 160.0f, Screen.height / 1.5f + 100.0f, 320, 50), "Game Start", style))
         {
             SpartanGameManager.Instance.DeadSpartan = 0;
             SpartanGameManager.Instance.TotalDeadSpartan = 0;
             SpartanGameManager.Instance.TotalSpartan = 5 + SpartanGameManager.Instance.Difficulty*2;
             SpartanGameManager.Instance.ChangeScene("#4_Spartan_Defense");
         }
-
-        GUIStyle temp = new GUIStyle();
-        temp.normal.textColor = Color.black;        
-        temp.fontSize = 100;
-        GUI.Box(new Rect(Screen.width / 2.0f - 200.0f, Screen.height / 4.0f, 400, 100), "스파르탄", temp);
     }
 }

@@ -15,13 +15,16 @@ public class Spartan_Spawner : MonoBehaviour
     private void Start()
     {
         Total_Count = SpartanGameManager.Instance.TotalSpartan;
-        InvokeRepeating("MakeObj", 1.0f, (4.0f - SpartanGameManager.Instance.Difficulty * 0.2f));
+        InvokeRepeating(nameof(MakeObj), 1.0f, (4.0f - SpartanGameManager.Instance.Difficulty * 0.2f));
     }
 
     private void OnGUI()
     {
-        GUIStyle temp = new GUIStyle();
-        temp.fontSize = 40;
+        GUIStyle temp = new()
+        {
+            fontSize = 40
+        };
+        temp.normal.textColor = Color.red;
         if (PhaseCounter < 10.0f)
             GUI.Box(new Rect(10, 110, 200, 50), "새 페이즈까지 남은 시간 : " + (int)PhaseCounter + "초", temp);
     }
@@ -35,7 +38,7 @@ public class Spartan_Spawner : MonoBehaviour
             {
                 isNewPhase = false;
                 PhaseCounter = 10.0f;
-                InvokeRepeating("MakeObj", 0.0f, 4.0f - SpartanGameManager.Instance.Difficulty*0.2f);
+                InvokeRepeating(nameof(MakeObj), 0.0f, 4.0f - SpartanGameManager.Instance.Difficulty*0.2f);
                 print("현재 생성 속도 : " + (4.0f - SpartanGameManager.Instance.Difficulty * 0.2f).ToString());
                 ++SpartanGameManager.Instance.Difficulty;
                 SpartanGameManager.Instance.TotalSpartan += 2;
@@ -62,13 +65,13 @@ public class Spartan_Spawner : MonoBehaviour
     {
         if (Spawn_Count >= Total_Count)
             return;
-        GameObject obj = null;
+        //GameObject obj = null;
         if (spartanObj != null)
         {
             float random = Random.Range(-4,5);
             Vector3 curPos = transform.position;
             curPos.x += random * 5.0f;
-            obj = Instantiate(spartanObj, curPos, transform.rotation);
+            Instantiate(spartanObj, curPos, transform.rotation);
             ++Spawn_Count;
         }
     }

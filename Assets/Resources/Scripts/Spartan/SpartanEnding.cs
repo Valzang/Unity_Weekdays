@@ -12,10 +12,12 @@ public class SpartanEnding : MonoBehaviour
             SpartanGameManager.Instance.ChangeScene("#4_Spartan_Setting");
         }
 
-        GUIStyle temp = new GUIStyle();
-        temp.normal.textColor = Color.yellow;
-        temp.fontSize = 80;
-        GUI.Box(new Rect(Screen.width / 2.0f-130, Screen.height / 2.0f-42.5f, 860, 85), "점수 : " + SpartanGameManager.Instance.TotalDeadSpartan * 100.0f, temp);
+
+        GUIStyle style_box = new(GUI.skin.box);
+        style_box.normal.textColor = Color.yellow;
+        style_box.fontSize = 80;
+        style_box.alignment = TextAnchor.MiddleCenter;
+        GUI.Box(new Rect(Screen.width / 2.0f-430, Screen.height / 2.0f-42.5f, 860, 85), "점수 : " + SpartanGameManager.Instance.TotalDeadSpartan * 100.0f, style_box);
         //GUI.Box(new Rect(Screen.width / 2.0f - 130, Screen.height / 2.0f + 42.5f, 600, 85), (SpartanGameManager.Instance.TotalDeadSpartan * 100.0f).ToString(), temp);
 
     }

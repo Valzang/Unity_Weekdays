@@ -7,7 +7,7 @@ public class SwordCollide : MonoBehaviour
     public GameObject thisBody = null;
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Enemy")
+        if(other.CompareTag("Enemy"))
         {
             if (other.name != thisBody.name)
             {
@@ -24,7 +24,7 @@ public class SwordCollide : MonoBehaviour
         }
 
         // 적이 장애물 부술때
-        if (other.tag == "Obstacle" && thisBody.tag == "Enemy")
+        if (other.CompareTag("Obstacle") && thisBody.CompareTag("Enemy"))
         {
             print("other : " + other.name + " / this : " + thisBody.name);
             Destroy(other.gameObject);

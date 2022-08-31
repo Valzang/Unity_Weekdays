@@ -7,10 +7,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private GameObject swordCollider = null;
     Animation spartanKing;
-
-    CharacterController pcControl;
-    private float runSpeed = 6.0f;
-    Vector3 Velocity;
+    //private CharacterController pcControl = null;
+    private readonly float runSpeed = 6.0f;
+    //Vector3 Velocity;
 
     //private float rotationSpeed = 360.0f;
     
@@ -22,7 +21,7 @@ public class PlayerController : MonoBehaviour
         spartanKing.wrapMode = WrapMode.Loop;
         spartanKing.Play("idle");
 
-        pcControl = gameObject.GetComponent<CharacterController>();
+        //pcControl = gameObject.GetComponent<CharacterController>();
     }
 
 
@@ -34,7 +33,7 @@ public class PlayerController : MonoBehaviour
         RotateView();
         CharacterControl_Slerp();
     }
-
+    /*
     private void Animation_Play_1()
     {
         if(Input.GetKeyDown(KeyCode.F))
@@ -148,12 +147,12 @@ public class PlayerController : MonoBehaviour
             spartanKing.Play("diehard");
         }
     }
-
+    */
     private void Animation_Play_3()
     {
         if (Input.GetKeyDown(KeyCode.F) || Input.GetMouseButton(0))
         {
-            StartCoroutine("BackToIdle", "attack");
+            StartCoroutine(nameof(BackToIdle), "attack");
             //spartanKing.wrapMode = WrapMode.Once;
             //spartanKing.CrossFade("attack", 0.3f);
             //spartanKing.Play("attack");
@@ -190,23 +189,23 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
-            StartCoroutine("BackToIdle", "resist");
+            StartCoroutine(nameof(BackToIdle), "resist");
         }
         if (Input.GetKeyDown(KeyCode.Alpha6))
         {
-            StartCoroutine("BackToIdle", "victory");
+            StartCoroutine(nameof(BackToIdle), "victory");
         }
         if (Input.GetKeyDown(KeyCode.Alpha7))
         {
-            StartCoroutine("BackToIdle", "salute");
+            StartCoroutine(nameof(BackToIdle), "salute");
         }
         if (Input.GetKeyDown(KeyCode.Alpha8))
         {
-            StartCoroutine("BackToIdle", "die");
+            StartCoroutine(nameof(BackToIdle), "die");
         }
         if (Input.GetKeyDown(KeyCode.Alpha9))
         {
-            StartCoroutine("BackToIdle", "diehard");
+            StartCoroutine(nameof(BackToIdle), "diehard");
         }
     }
 
@@ -217,7 +216,7 @@ public class PlayerController : MonoBehaviour
             spartanKing.wrapMode = WrapMode.Once;
             spartanKing.CrossFade(_animName, 0.3f);
             if (_animName == "attack")
-                swordCollider.gameObject.GetComponent<BoxCollider>().enabled = true;
+                swordCollider.GetComponent<BoxCollider>().enabled = true;
 
 
             float delayTime = spartanKing.GetClip(_animName).length - 0.3f;
@@ -226,10 +225,11 @@ public class PlayerController : MonoBehaviour
 
             spartanKing.wrapMode = WrapMode.Loop;
             spartanKing.CrossFade("idle", 0.3f);
-            swordCollider.gameObject.GetComponent<BoxCollider>().enabled = false;
+            swordCollider.GetComponent<BoxCollider>().enabled = false;
         }        
     }
 
+    /*
     private void CharacterControl()
     {
         Velocity = new Vector3(Input.GetAxis("Horizontal"),
@@ -251,7 +251,7 @@ public class PlayerController : MonoBehaviour
         //pcControl.Move(Velocity * Time.deltaTime + Physics.gravity * 0.01f);
         pcControl.SimpleMove(Velocity);
     }
-
+    */
     private void CharacterControl_Slerp()
     {
         if (spartanKing.IsPlaying("attack"))
@@ -259,7 +259,7 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetKey(KeyCode.W))
         {
-            transform.Translate(Vector3.forward * runSpeed*2.0f * Time.deltaTime);
+            transform.Translate(2.0f * runSpeed * Time.deltaTime * Vector3.forward);
             spartanKing.CrossFade("run", 0.3f);
         }
         else 
@@ -320,9 +320,12 @@ public class PlayerController : MonoBehaviour
     }
     private void OnGUI()
     {
-        GUIStyle temp = new GUIStyle();
-        temp.fontSize = 40;
-        GUI.Box(new Rect(10, 10, 200, 50), "해치운 적 : " + SpartanGameManager.Instance.DeadSpartan.ToString() + "/" + SpartanGameManager.Instance.TotalSpartan.ToString() + "명", temp);
-        GUI.Box(new Rect(10, 60, 200, 50), "현재 레벨 : " + SpartanGameManager.Instance.Difficulty.ToString(), temp);
+        GUIStyle style = new(GUI.skin.box)
+        {
+            fontSize = 40
+        };
+        style.normal.textColor = Color.black;
+        GUI.Box(new Rect(10, 10, 350, 50), "해치운 적 : " + SpartanGameManager.Instance.DeadSpartan.ToString() + "/" + SpartanGameManager.Instance.TotalSpartan.ToString() + "명", style);
+        GUI.Box(new Rect(10, 60, 350, 50), "현재 레벨 : " + SpartanGameManager.Instance.Difficulty.ToString(), style);
     }
 }

@@ -31,7 +31,7 @@ public class Spawner_OG : MonoBehaviour
         }        
     }*/
 
-    IEnumerator enumerator;
+    //IEnumerator enumerator;
 
     private void Start()
     {
@@ -42,15 +42,11 @@ public class Spawner_OG : MonoBehaviour
 
         //enumerator = CountTime(1.0f);
         //StartCoroutine(enumerator);
-        StartCoroutine("CountTime",1.0f);
+        StartCoroutine(nameof(CountTime),1.0f);
     }
 
-    private void Update()
-    {
-        //if (count > 10)
 
-    }
-
+    /*
     void MakeObj()
     {
         GameObject obj = null;
@@ -64,7 +60,7 @@ public class Spawner_OG : MonoBehaviour
             //Invoke("MakeObj", 1.0f);
         }
     }
-
+    */
 
     IEnumerator CountTime(float delayTime)
     {
