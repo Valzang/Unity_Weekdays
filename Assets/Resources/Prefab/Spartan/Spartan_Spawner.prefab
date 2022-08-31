@@ -44,5 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03abd8853add7a941a7d86481ae225d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spartanObj: {fileID: 8445495866228516685, guid: 5aedd021c8f308e41bf78dcc23549d2f,
+  spartanObj: {fileID: 2506963439424268788, guid: 8a8fc695829b73f4b98b87c1afb6631c,
     type: 3}
+  Total_Count: 5
+  Spawn_Count: 0

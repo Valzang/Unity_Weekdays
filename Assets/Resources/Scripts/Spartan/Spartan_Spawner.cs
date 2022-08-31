@@ -9,7 +9,7 @@ public class Spartan_Spawner : MonoBehaviour
 
     public int Total_Count = 5;
     public int Spawn_Count = 0;
-    private float PhaseCounter = 10.0f;
+    private float PhaseCounter = 15.0f;
     private bool isNewPhase = false;
 
     private void Start()
@@ -25,7 +25,7 @@ public class Spartan_Spawner : MonoBehaviour
             fontSize = 40
         };
         temp.normal.textColor = Color.red;
-        if (PhaseCounter < 10.0f)
+        if (PhaseCounter < 15.0f)
             GUI.Box(new Rect(10, 110, 200, 50), "새 페이즈까지 남은 시간 : " + (int)PhaseCounter + "초", temp);
     }
 
@@ -37,7 +37,7 @@ public class Spartan_Spawner : MonoBehaviour
             if(PhaseCounter <= 0.0f)
             {
                 isNewPhase = false;
-                PhaseCounter = 10.0f;
+                PhaseCounter = 15.0f;
                 InvokeRepeating(nameof(MakeObj), 0.0f, 4.0f - SpartanGameManager.Instance.Difficulty*0.2f);
                 print("현재 생성 속도 : " + (4.0f - SpartanGameManager.Instance.Difficulty * 0.2f).ToString());
                 ++SpartanGameManager.Instance.Difficulty;
@@ -71,6 +71,7 @@ public class Spartan_Spawner : MonoBehaviour
             float random = Random.Range(-4,5);
             Vector3 curPos = transform.position;
             curPos.x += random * 5.0f;
+            curPos.y -= 1.9f;
             Instantiate(spartanObj, curPos, transform.rotation);
             ++Spawn_Count;
         }
