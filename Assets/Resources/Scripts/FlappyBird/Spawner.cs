@@ -35,7 +35,7 @@ public class Spawner : MonoBehaviour
         // 1초 지연 후 MakeObj를 발생시킴
         //Invoke("MakeObj", 1.0f);
         // 1초 지연 후 0.5초 단위로 반복 호출
-        InvokeRepeating("MakeObj", 1.0f, 1.2f);
+        InvokeRepeating(nameof(MakeObj), 1.0f, 1.2f);
     }
 
     void MakeObj()

@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 99ec463a63c842d4b97395d190893cb9
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - wolfObj: {fileID: 1380366647810862314, guid: 0d7c73fab99691b45bf07f2f288a05b0,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -50,4 +50,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Resources/Scenes/Assignment/#4 Spartan/#4_Spartan_Setting.unity
     guid: 4874a4a8a0de8394cbd15d7c708f0e1f
+  - enabled: 1
+    path: Assets/Resources/Scenes/Assignment/#5 2D_Shooting/2D_Login.unity
+    guid: e050e017873bb974e9aeda6d630fed49
+  - enabled: 1
+    path: Assets/Resources/Scenes/Assignment/#5 2D_Shooting/2D_Shooting.unity
+    guid: 3de079bcc7f9c7f42ab78c31ae96a30e
   m_configObjects: {}
