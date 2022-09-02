@@ -8,11 +8,19 @@ public class UI_Login : MonoBehaviour
 
     public InputField inputText;
 
-
-    void onClickOK()
+    void onTextChanged()
     {
+       
+    }
+
+    void onTextEndEdit()
+    {
+        
+    }
+    void onClickOK()
+    {        
         print(inputText.text + " ·Î±×ÀÎ");
-        ShootingGameManager.Instance.ID_text.text = inputText.text;
+        ShootingGameManager.Instance.ID_text = inputText.text;
         ShootingGameManager.Instance.ChangeScene("2D_Shooting");
     }
 }

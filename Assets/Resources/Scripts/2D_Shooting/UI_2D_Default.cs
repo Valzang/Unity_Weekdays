@@ -5,24 +5,22 @@ using UnityEngine.UI;
 
 public class UI_2D_Default : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject OptionUI = null;
 
     public GameObject textObj = null;
     public Image imgHPBar;
 
-    private bool isTimeStop = false;
+
 
     void Start()
     {
         if(ShootingGameManager.Instance.ID_text != null)
-            textObj.GetComponent<Text>().text = ShootingGameManager.Instance.ID_text.text;
+            textObj.GetComponent<Text>().text = ShootingGameManager.Instance.ID_text;
         else
             textObj.GetComponent<Text>().text = "Test01";
         ShowHPBar(100);
-    }
-
-    void Update()
-    {
-        
+        OptionUI.SetActive(false);
     }
 
     public void ShowHPBar(int hp)
@@ -32,10 +30,11 @@ public class UI_2D_Default : MonoBehaviour
 
     void TimeStop()
     {
-        if(!isTimeStop)
+        if(!ShootingGameManager.Instance.isTimeStop)
         {
             Time.timeScale = 0.0f;
-            isTimeStop = true;
+            ShootingGameManager.Instance.isTimeStop = true;
+            OptionUI.SetActive(true);
         }
         
     }

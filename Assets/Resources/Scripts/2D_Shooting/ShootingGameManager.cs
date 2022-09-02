@@ -7,9 +7,11 @@ using UnityEngine.SceneManagement;
 public class ShootingGameManager : MonoBehaviour
 {
     public int Difficulty = 1;
-    public Text ID_text;
+    public string ID_text;
     public uint Player_Money = 0;
     public uint Player_Score = 0;
+
+    public bool isTimeStop = false;
 
     private static ShootingGameManager sInstance;
     public static ShootingGameManager Instance
