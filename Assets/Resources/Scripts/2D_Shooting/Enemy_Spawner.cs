@@ -7,16 +7,18 @@ public class Enemy_Spawner : MonoBehaviour
 {
     [SerializeField]
     private GameObject wolfObj = null;
+    [SerializeField]
+    private GameObject coinObj = null;
 
     //public int Total_Count = 5;
     //public int Spawn_Count = 0;
     //private float PhaseCounter = 15.0f;
     //private bool isNewPhase = false;
 
-    // 185~-185
     private void Start()
     {
         InvokeRepeating(nameof(MakeObj), 1.0f, 2.0f);
+        InvokeRepeating(nameof(MakeCoin), 5.0f, 10.0f);
     }
 
    //private void OnGUI()
@@ -35,18 +37,28 @@ public class Enemy_Spawner : MonoBehaviour
 
     public void StopInvoke()
     {
-        CancelInvoke("MakeObj");
+        CancelInvoke(nameof(MakeObj));
+        CancelInvoke(nameof(MakeCoin));
         return;
     }
 
     void MakeObj()
     {
-        //GameObject obj = null;
         if (wolfObj != null)
         {
-            float random = Random.Range(-185, 186);
+            float random = Random.Range(-185, 91);
             Vector3 curPos = new Vector3(440, random, 0);
             Instantiate(wolfObj, curPos, transform.rotation);
+        }
+    }
+
+    void MakeCoin()
+    {
+        if (wolfObj != null)
+        {
+            float random = Random.Range(-185, 91);
+            Vector3 curPos = new Vector3(440, random, 0);
+            Instantiate(coinObj, curPos, transform.rotation);
         }
     }
 }

@@ -6,6 +6,8 @@ MonoImporter:
   defaultReferences:
   - wolfObj: {fileID: 1380366647810862314, guid: 0d7c73fab99691b45bf07f2f288a05b0,
       type: 3}
+  - coinObj: {fileID: 6741503019598194916, guid: 7140cef65812ebd4e935e825bc92755a,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

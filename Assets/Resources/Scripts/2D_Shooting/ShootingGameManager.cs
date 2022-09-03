@@ -13,6 +13,8 @@ public class ShootingGameManager : MonoBehaviour
 
     public bool isTimeStop = false;
 
+    public float volume = 0.0f;
+
     private static ShootingGameManager sInstance;
     public static ShootingGameManager Instance
     {

@@ -9,6 +9,7 @@ TagManager:
   - LINE
   - Car
   - Enemy
+  - Item
   layers:
   - Default
   - TransparentFX

@@ -24,6 +24,7 @@ public class Option : MonoBehaviour
 
     void ShowMute()
     {
+        ShootingGameManager.Instance.volume = _slider.value;
         if (_slider.value == -1.0f)
             _Mute.enabled = true;
         else if (_Mute.enabled == true)

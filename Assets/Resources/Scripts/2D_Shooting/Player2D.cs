@@ -7,11 +7,12 @@ using UnityEngine;
 public class Player2D : MonoBehaviour
 {
     private Rigidbody2D rigidBody;
-    
+
     [SerializeField]
-    private float maxSpeed = 500.0f;
+    private float maxSpeed = 250.0f;
     [SerializeField]
     private GameObject Fireball = null;
+
 
     private float Fireball_Cooltime = 1.0f;
 
@@ -60,8 +61,13 @@ public class Player2D : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        print("tri : Àû°ú ºÎµúÇû¾î !");
+        if (collision.tag == "Item")
+        {
+            ShootingGameManager.Instance.Player_Money += 100;
+            print("Á¡¼ö : " + ShootingGameManager.Instance.Player_Money);
+        }            
     }
+
 
     //private void OnCollisionEnter2D(Collision2D collision)
     //{

@@ -3,9 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Enemy_Move : MonoBehaviour
+[RequireComponent(typeof(AudioSource))]
+public class Coin_Move : MonoBehaviour
 {
     private Rigidbody2D rigidBody;
+    private AudioSource _Sound;
+
+    [SerializeField]
+    private AudioClip coinSound = null;
 
     [SerializeField]
     private float maxSpeed = 250.0f;
@@ -14,6 +19,9 @@ public class Enemy_Move : MonoBehaviour
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
+        _Sound = GetComponent<AudioSource>();
+        _Sound.clip = coinSound;
+        _Sound.loop = false;
     }
     private void FixedUpdate()
     {
@@ -31,25 +39,14 @@ public class Enemy_Move : MonoBehaviour
             Destroy(this.gameObject);
     }
 
-   
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        switch(collision.tag)
+        if (collision.tag == "Player")
         {
-            case "Player":
-                print("tri : 플레이어와 부딪혔어 !");
-                break;
-            default:
-                print("tri : 파이어볼에 맞았어 !");
-                break;
+            _Sound.Play();
+            this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            this.gameObject.GetComponent<CircleCollider2D>().enabled = false;
         }
-            
-
     }
-
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    print("col : 플레이어와 부딪혔어 !");
-    //}
 }

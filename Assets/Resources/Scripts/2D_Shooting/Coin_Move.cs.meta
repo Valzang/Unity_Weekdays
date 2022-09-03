@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 977de6998d76e0348b8ba67e9e25bb2f
+guid: e91ed8e0232b03448bee8c6fdc8e76c5
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - Fireball: {fileID: 589938780384607427, guid: 2bff7c08fa4e96449b382d3249068002,
-      type: 3}
   - coinSound: {fileID: 8300000, guid: 56cfc24f523d5c64ab517963fc461e04, type: 3}
-  - WingSound: {fileID: 8300000, guid: 56a1228e784384748bb35caf94f61ede, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
