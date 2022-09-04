@@ -8,19 +8,27 @@ public class UI_2D_Default : MonoBehaviour
     [SerializeField]
     private GameObject OptionUI = null;
 
-    public GameObject textObj = null;
+    public GameObject ID_Obj = null;
+    public GameObject Money_Obj = null;
+    public GameObject Score_Obj = null;
     public Image imgHPBar;
-
-
 
     void Start()
     {
-        if(ShootingGameManager.Instance.ID_text != null)
-            textObj.GetComponent<Text>().text = ShootingGameManager.Instance.ID_text;
+        if(ShootingGameManager.Instance.ID_text != null && ShootingGameManager.Instance.ID_text != "")
+            ID_Obj.GetComponent<Text>().text = ShootingGameManager.Instance.ID_text;
         else
-            textObj.GetComponent<Text>().text = "Test01";
+            ID_Obj.GetComponent<Text>().text = "Test01";
+
+
         ShowHPBar(100);
         OptionUI.SetActive(false);
+    }
+
+    private void FixedUpdate()
+    {
+        Money_Obj.GetComponent<Text>().text = ShootingGameManager.Instance.Player_Money.ToString();
+        Score_Obj.GetComponent<Text>().text = ShootingGameManager.Instance.Player_Score.ToString();
     }
 
     public void ShowHPBar(int hp)

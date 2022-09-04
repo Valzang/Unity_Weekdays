@@ -10,6 +10,7 @@ public class ShootingGameManager : MonoBehaviour
     public string ID_text;
     public uint Player_Money = 0;
     public uint Player_Score = 0;
+    public float PlayTime = 0.0f;
 
     public bool isTimeStop = false;
 

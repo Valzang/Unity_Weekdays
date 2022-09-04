@@ -38,6 +38,9 @@ public class Enemy_Move : MonoBehaviour
         switch(collision.tag)
         {
             case "Player":
+                {
+                    
+                }
                 print("tri : ÇÃ·¹ÀÌ¾î¿Í ºÎµúÇû¾î !");
                 break;
             default:

@@ -146,6 +146,7 @@ MonoBehaviour:
   maxSpeed: 400
   Explosion: {fileID: 545123893462431267, guid: 1f5d7b4bbf134c749894b4fcb550ebde,
     type: 3}
+  coinObj: {fileID: 6741503019598194916, guid: 7140cef65812ebd4e935e825bc92755a, type: 3}
 --- !u!58 &4275346888415561921
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -270,4 +271,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d712de9724f4b124c9075b682925d910, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volumeSlider: {fileID: 0}

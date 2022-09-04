@@ -10,6 +10,8 @@ public class Fireball_Move : MonoBehaviour
     private float maxSpeed = 600.0f;
     [SerializeField]
     private GameObject Explosion = null;
+    [SerializeField]
+    private GameObject coinObj = null;
 
     // Start is called before the first frame update
     void Start()
@@ -37,9 +39,8 @@ public class Fireball_Move : MonoBehaviour
     {
         if(collision.tag == "Enemy")
         {
-            Vector3 curPos = transform.position;
-            curPos.x += 60;
-            Instantiate(Explosion, curPos, transform.rotation);
+            Instantiate(coinObj, collision.transform.position, collision.transform.rotation);
+            Instantiate(Explosion, collision.transform.position, collision.transform.rotation);
             Destroy(collision.gameObject);
             ShootingGameManager.Instance.Player_Score += 100;
             Destroy(this.gameObject);

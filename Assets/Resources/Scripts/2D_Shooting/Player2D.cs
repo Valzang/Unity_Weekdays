@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody2D))]
 
@@ -12,6 +13,13 @@ public class Player2D : MonoBehaviour
     private float maxSpeed = 250.0f;
     [SerializeField]
     private GameObject Fireball = null;
+    [SerializeField]
+    private Image HPBar;
+    [SerializeField]
+    private GameObject DamageSound = null;
+
+
+    private float HP = 100.0f;
 
 
     private float Fireball_Cooltime = 1.0f;
@@ -26,6 +34,7 @@ public class Player2D : MonoBehaviour
     void Update()
     {        
         Attack();
+        ShootingGameManager.Instance.PlayTime += Time.deltaTime;
     }
 
     private void FixedUpdate()
@@ -39,9 +48,17 @@ public class Player2D : MonoBehaviour
         float y = Input.GetAxis("Vertical");
 
         Vector3 position = rigidBody.transform.position;
-        position = new Vector3(position.x + (x * maxSpeed * Time.deltaTime),
-                                position.y + (y * maxSpeed * Time.deltaTime),
-                                position.z);
+        if ((position.x > -437.0f && x < 0)
+            || position.x < 430.0f && x > 0)
+            position.x += (x * maxSpeed * Time.deltaTime);
+
+        if ((position.y < 93.0f && y > 0)
+            || (position.y > -230.0f && y < 0))
+            position.y += (y * maxSpeed * Time.deltaTime);
+
+        //position = new Vector3(position.x + (x * maxSpeed * Time.deltaTime),
+        //                        position.y + (y * maxSpeed * Time.deltaTime),
+        //                        position.z);
 
         rigidBody.MovePosition(position);
     }
@@ -61,11 +78,35 @@ public class Player2D : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Item")
+        switch(collision.tag)
         {
-            ShootingGameManager.Instance.Player_Money += 100;
-            print("점수 : " + ShootingGameManager.Instance.Player_Money);
-        }            
+            case "Item":
+                ShootingGameManager.Instance.Player_Money += 100;
+                print("점수 : " + ShootingGameManager.Instance.Player_Money);
+                break;
+            case "Enemy":
+                HP -= 30.0f;
+                HPBar.fillAmount = HP / 100.0f;
+                StartCoroutine(Flick());
+                DamageSound.GetComponent<AudioSource>().Play();
+                if (HP <= 0.0f)
+                    ShootingGameManager.Instance.ChangeScene("2D_Score");
+                break;
+        }        
+    }
+
+    public IEnumerator Flick()
+    {
+        int count = 0;
+
+        while (count < 3)
+        {
+            this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            yield return new WaitForSeconds(0.1f);
+            this.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+            yield return new WaitForSeconds(0.1f);
+            count++;
+        }
     }
 
 

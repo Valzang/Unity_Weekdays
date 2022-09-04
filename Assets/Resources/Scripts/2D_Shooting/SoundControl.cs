@@ -9,8 +9,6 @@ public class SoundControl : MonoBehaviour
 
     private AudioSource curAudioSource = null;
 
-    private float default_volume = 0.0f;
-
     void Start()
     {
         curAudioSource = this.gameObject.GetComponent<AudioSource>();

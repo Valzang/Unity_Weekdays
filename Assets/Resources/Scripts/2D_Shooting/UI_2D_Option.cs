@@ -13,6 +13,7 @@ public class UI_2D_Option : MonoBehaviour
         titleText = gameObject.GetComponentInChildren<Text>() as Text;
     }
 
+
     void onClickOK()
     {
         print("onClickOK");
