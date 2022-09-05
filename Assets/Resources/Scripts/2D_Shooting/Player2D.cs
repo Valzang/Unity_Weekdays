@@ -8,7 +8,8 @@ using UnityEngine.UI;
 public class Player2D : MonoBehaviour
 {
     private Rigidbody2D rigidBody;
-
+    [SerializeField]
+    private Object ItemUI = null;
     [SerializeField]
     private float maxSpeed = 250.0f;
     [SerializeField]
@@ -17,28 +18,43 @@ public class Player2D : MonoBehaviour
     private Image HPBar;
     [SerializeField]
     private GameObject DamageSound = null;
+    [SerializeField]
+    private GameObject WaterSound = null;
 
 
-    private float HP = 100.0f;
-
-
+    private float curSpeed = 0.0f;
     private float Fireball_Cooltime = 1.0f;
+    private float DoubleMoney_Time = 0.0f;
 
     
     void Start()
     {
+        curSpeed = maxSpeed;
         rigidBody = GetComponent<Rigidbody2D>();
+        ShootingGameManager.Instance.ItemUI = ItemUI;
+        ShootingGameManager.Instance.HPBar = HPBar;
     }
 
     
     void Update()
-    {        
+    {
+        if (ShootingGameManager.Instance.Getting_Money != 100)
+        {
+            DoubleMoney_Time += Time.deltaTime;
+            if (DoubleMoney_Time > 60.0f)
+            { 
+                DoubleMoney_Time = 0.0f;
+                ShootingGameManager.Instance.Getting_Money = 100;
+            }
+        }
+            
         Attack();
         ShootingGameManager.Instance.PlayTime += Time.deltaTime;
     }
 
     private void FixedUpdate()
     {
+        curSpeed = maxSpeed * ShootingGameManager.Instance.Player_SpeedRatio;
         Move_2D();
     }
 
@@ -48,13 +64,13 @@ public class Player2D : MonoBehaviour
         float y = Input.GetAxis("Vertical");
 
         Vector3 position = rigidBody.transform.position;
-        if ((position.x > -437.0f && x < 0)
-            || position.x < 430.0f && x > 0)
-            position.x += (x * maxSpeed * Time.deltaTime);
+        if ((position.x > -426.0f && x < 0)
+            || position.x < 417.0f && x > 0)
+            position.x += (x * curSpeed * Time.deltaTime);
 
-        if ((position.y < 93.0f && y > 0)
-            || (position.y > -230.0f && y < 0))
-            position.y += (y * maxSpeed * Time.deltaTime);
+        if ((position.y < 150.0f && y > 0)
+            || (position.y > -225.0f && y < 0))
+            position.y += (y * curSpeed * Time.deltaTime);
 
         //position = new Vector3(position.x + (x * maxSpeed * Time.deltaTime),
         //                        position.y + (y * maxSpeed * Time.deltaTime),
@@ -65,7 +81,7 @@ public class Player2D : MonoBehaviour
 
     void Attack()
     {
-        if(Input.GetKeyDown(KeyCode.LeftControl) && Fireball_Cooltime >= 1.0f)
+        if(Input.GetKeyDown(KeyCode.LeftControl) && Fireball_Cooltime >= ShootingGameManager.Instance.Fireball_time)
         {
             Vector3 curPos = transform.position;
             curPos.x += 80;
@@ -81,18 +97,37 @@ public class Player2D : MonoBehaviour
         switch(collision.tag)
         {
             case "Item":
-                ShootingGameManager.Instance.Player_Money += 100;
-                print("Á¡¼ö : " + ShootingGameManager.Instance.Player_Money);
+                ShootingGameManager.Instance.Player_Money += ShootingGameManager.Instance.Getting_Money;
                 break;
             case "Enemy":
-                HP -= 30.0f;
-                HPBar.fillAmount = HP / 100.0f;
-                StartCoroutine(Flick());
-                DamageSound.GetComponent<AudioSource>().Play();
-                if (HP <= 0.0f)
-                    ShootingGameManager.Instance.ChangeScene("2D_Score");
+                GetDamage(25);
+                break;
+            case "Obstacle":
+                //WaterSound.GetComponent<AudioSource>().Play();
+                GetDamage(10);                
+
+                Destroy(collision.gameObject);
                 break;
         }        
+    }
+
+    private void GetDamage(int _Damage)
+    {
+        DamageSound.GetComponent<AudioSource>().Play();
+        ShootingGameManager.Instance.Player_HP -= _Damage;
+        print(ShootingGameManager.Instance.Player_HP);
+        HPBar.fillAmount = ShootingGameManager.Instance.Player_HP / 100.0f;
+        StartCoroutine(Flick());
+        if (ShootingGameManager.Instance.Player_HP <= 0)
+        { 
+            if(ShootingGameManager.Instance.Player_Life == true)
+            {
+                ShootingGameManager.Instance.Player_Life = false;
+                ShootingGameManager.Instance.Player_HP = 100;
+            }
+            else
+                ShootingGameManager.Instance.ChangeScene("2D_Score");
+        }
     }
 
     public IEnumerator Flick()

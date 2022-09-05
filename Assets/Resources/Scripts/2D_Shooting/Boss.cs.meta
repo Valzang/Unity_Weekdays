@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 288b8b0c46324644f98946d5e2719f63
+guid: 8247be17a603c15438785cd28580f543
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - ItemUI: {fileID: 8544151398635534400, guid: b8c05aab0755e834ba3c4b8df78d18d3,
+  - AttackProj: {fileID: 5363108968683745594, guid: 4f97b837e1dbe5d4b8ddeb6b425dc60d,
       type: 3}
   executionOrder: 0
   icon: {instanceID: 0}

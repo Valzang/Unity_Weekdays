@@ -10,6 +10,8 @@ TagManager:
   - Car
   - Enemy
   - Item
+  - Enemy_Boss
+  - Projectiles
   layers:
   - Default
   - TransparentFX

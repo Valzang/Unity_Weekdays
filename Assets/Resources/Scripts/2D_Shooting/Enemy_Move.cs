@@ -9,15 +9,41 @@ public class Enemy_Move : MonoBehaviour
 
     [SerializeField]
     private float maxSpeed = 250.0f;
+    [SerializeField]
+    private GameObject Waterball = null;
+
+    private float waterBall_Cooltime = 1.5f;
 
 
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
     }
+
+    private void Update()
+    {
+        Attack();
+    }
     private void FixedUpdate()
     {
         Move_2D();
+    }
+
+    void Attack()
+    {
+        if (waterBall_Cooltime >= 2.0f)
+        {
+            Vector3 curPos = transform.position;
+            Vector3 curRot = transform.localRotation.eulerAngles;
+
+            Instantiate(Waterball, curPos, Quaternion.Euler(curRot));
+            curRot.z += 30;
+            Instantiate(Waterball, curPos, Quaternion.Euler(curRot));
+            curRot.z -= 60;
+            Instantiate(Waterball, curPos, Quaternion.Euler(curRot));
+            waterBall_Cooltime = 0.0f;
+        }
+        waterBall_Cooltime += Time.deltaTime;
     }
 
     void Move_2D()
@@ -31,28 +57,4 @@ public class Enemy_Move : MonoBehaviour
             Destroy(this.gameObject);
     }
 
-   
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        switch(collision.tag)
-        {
-            case "Player":
-                {
-                    
-                }
-                print("tri : 플레이어와 부딪혔어 !");
-                break;
-            default:
-                print("tri : 파이어볼에 맞았어 !");
-                break;
-        }
-            
-
-    }
-
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    print("col : 플레이어와 부딪혔어 !");
-    //}
 }

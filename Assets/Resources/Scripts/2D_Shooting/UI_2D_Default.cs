@@ -11,7 +11,13 @@ public class UI_2D_Default : MonoBehaviour
     public GameObject ID_Obj = null;
     public GameObject Money_Obj = null;
     public GameObject Score_Obj = null;
+
+    public GameObject DoubleMoney_Obj = null;
+    private GameObject DM_Text = null;
+
     public Image imgHPBar;
+
+    private float First_DoubleTime = 60.0f;
 
     void Start()
     {
@@ -20,7 +26,7 @@ public class UI_2D_Default : MonoBehaviour
         else
             ID_Obj.GetComponent<Text>().text = "Test01";
 
-
+        DM_Text = DoubleMoney_Obj.transform.GetChild(0).gameObject;
         ShowHPBar(100);
         OptionUI.SetActive(false);
     }
@@ -29,6 +35,19 @@ public class UI_2D_Default : MonoBehaviour
     {
         Money_Obj.GetComponent<Text>().text = ShootingGameManager.Instance.Player_Money.ToString();
         Score_Obj.GetComponent<Text>().text = ShootingGameManager.Instance.Player_Score.ToString();
+        if (ShootingGameManager.Instance.Getting_Money != 100)
+        { 
+            DoubleMoney_Obj.SetActive(true);
+            DoubleMoney_Obj.GetComponent<Image>().fillAmount = First_DoubleTime / 60.0f;
+            
+            First_DoubleTime -= Time.deltaTime;
+            DM_Text.GetComponent<Text>().text = ((int)(First_DoubleTime)).ToString();
+        }
+        else if (DoubleMoney_Obj.activeSelf == true)
+        {
+            DoubleMoney_Obj.SetActive(false);
+            First_DoubleTime = 60.0f;
+        }
     }
 
     public void ShowHPBar(int hp)

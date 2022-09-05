@@ -1,0 +1,25 @@
+fileFormatVersion: 2
+guid: b4a4662eb0c9100488155a4e3a63e2e3
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - Item_Healing: {fileID: 8728005744251880674, guid: 65ca6d06e8d7b424a95919f4ae6e4bae,
+      type: 3}
+  - Item_DoubleMoney: {fileID: 6769684382706860373, guid: eb2c08cf8d049d44cb0b08fc553d1bd3,
+      type: 3}
+  - Item_PlayerSpeedUp: {fileID: 5175115733168705490, guid: 1ed73666e1fdb414594ca7276b70b0c3,
+      type: 3}
+  - Item_FireballSpeedUp: {fileID: 8897299982419628396, guid: 60a16bc1f4bcae644aaab0db2694f0c3,
+      type: 3}
+  - Item_Fireball_Increase: {fileID: 9201430977664666298, guid: 054439db2ffcebd4e9e1f1eb968c1d65,
+      type: 3}
+  - Item_PlayerLife_Increase: {fileID: 583911907366915038, guid: efaa92dcff6ccd048bf811a90ef2b501,
+      type: 3}
+  - Item_Fireball_Pierce: {fileID: 1534791475036769445, guid: 2c243371c131e0a44bd4b03428b1b243,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

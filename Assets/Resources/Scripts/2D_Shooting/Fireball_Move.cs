@@ -37,13 +37,14 @@ public class Fireball_Move : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Enemy")
+        if(collision.CompareTag("Enemy"))
         {
             Instantiate(coinObj, collision.transform.position, collision.transform.rotation);
             Instantiate(Explosion, collision.transform.position, collision.transform.rotation);
             Destroy(collision.gameObject);
             ShootingGameManager.Instance.Player_Score += 100;
-            Destroy(this.gameObject);
+            if(ShootingGameManager.Instance.Fireball_Pierce == false)
+                Destroy(this.gameObject);
         }
         
     }
