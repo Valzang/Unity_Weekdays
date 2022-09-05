@@ -127,6 +127,8 @@ MonoBehaviour:
     type: 3}
   Item_PlayerLife_Increase: {fileID: 583911907366915038, guid: efaa92dcff6ccd048bf811a90ef2b501,
     type: 3}
+  Item_SelfHeal: {fileID: 8728005744251880674, guid: bdf23735a98451542991e3c4b46c171c,
+    type: 3}
   Item_Fireball_Pierce: {fileID: 1534791475036769445, guid: 2c243371c131e0a44bd4b03428b1b243,
     type: 3}
 --- !u!1 &8544151399496070915

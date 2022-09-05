@@ -1,7 +1,16 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Item_Parent : MonoBehaviour
 {
+    [SerializeField]
+    private int Price = 0;
+
+    private void Start()
+    {
+        if (ShootingGameManager.Instance.Player_Money < (uint)Price)
+            this.gameObject.GetComponent<Button>().interactable = false;
+    }
 
     void Back()
     {
@@ -14,12 +23,13 @@ public class Item_Parent : MonoBehaviour
 
     void onClick_Healing()
     {
+                
         if (ShootingGameManager.Instance.Player_HP >= 70)
             ShootingGameManager.Instance.Player_HP = 100;
         else
             ShootingGameManager.Instance.Player_HP += 30;
-        ShootingGameManager.Instance.HPBar.fillAmount = ShootingGameManager.Instance.Player_HP / 100.0f;
-        ShootingGameManager.Instance.Player_Money -= 500;
+        ShootingGameManager.Instance.HPBar.fillAmount = (float)(ShootingGameManager.Instance.Player_HP / 100.0f);
+        ShootingGameManager.Instance.Player_Money -= (uint)Price;
         Back();
     }
     void onClick_DoubleMoney()
@@ -33,7 +43,6 @@ public class Item_Parent : MonoBehaviour
     }
     void onClick_PlayerSpeedUp()
     {
-
         ShootingGameManager.Instance.Player_SpeedRatio += 0.1f;
         print("이전 속도 : " + (ShootingGameManager.Instance.Player_SpeedRatio - 0.1f).ToString() + "/ 현재 속도 : " + ShootingGameManager.Instance.Player_SpeedRatio);
         ShootingGameManager.Instance.Player_Money -= 1000;
@@ -48,7 +57,6 @@ public class Item_Parent : MonoBehaviour
     }
     void onClick_Fireball_Increase()
     {
-
     }
     void onClick_PlayerLife_Increase()
     {
@@ -60,6 +68,12 @@ public class Item_Parent : MonoBehaviour
     {
         ShootingGameManager.Instance.Fireball_Pierce = true;
         ShootingGameManager.Instance.Player_Money -= 5000;
+        Back();
+    }
+
+    void onClick_SelfHeal()
+    {
+        ShootingGameManager.Instance.selfHeal += 0.002;
         Back();
     }
 }

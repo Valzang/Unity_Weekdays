@@ -7,9 +7,8 @@ using UnityEngine.SceneManagement;
 public class ShootingGameManager : MonoBehaviour
 {
     public Object ItemUI = null;
+    public uint ItemCondition = 1000;
 
-    public int Difficulty = 1;
-    public string ID_text;
 
     // 돈 관련
     public uint Player_Money = 0;
@@ -17,16 +16,25 @@ public class ShootingGameManager : MonoBehaviour
     public uint Player_Score = 0;
 
     // 플레이어 관련
-    public int Player_HP = 100;
+    public string ID_text;
+    public double Player_HP = 100;
     public Image HPBar = null;
     public bool Player_Life = false;
     public float Player_SpeedRatio = 1.0f;
+    public double selfHeal = 0.0;
 
     // 파이어볼 관련
     public float Fireball_time = 1.0f;
     public bool Fireball_Pierce = false;
 
-    public uint ItemCondition = 1000;
+    // 파이어볼 관련
+    public float waterball_time = 1.5f;
+
+    //보스
+    public bool isBoss = false;
+    public int BossPhase = 0;
+    public int prev_BossPhase = 0;
+
 
 
     public float PlayTime = 0.0f;

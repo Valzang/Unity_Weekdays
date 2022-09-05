@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 69242356}
   - component: {fileID: 69242355}
+  - component: {fileID: 99800364}
   m_Layer: 0
   m_Name: Water
   m_TagString: Untagged
@@ -128,6 +129,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &99800364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 69242354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d712de9724f4b124c9075b682925d910, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3951999541538106000
 GameObject:
   m_ObjectHideFlags: 0
@@ -140,8 +153,8 @@ GameObject:
   - component: {fileID: 3951999541538106002}
   - component: {fileID: 3951999541538106003}
   - component: {fileID: 3951999541538106006}
-  - component: {fileID: 3951999541538106007}
   - component: {fileID: 3951999541538106004}
+  - component: {fileID: 8963296817831707474}
   - component: {fileID: 1703214888}
   - component: {fileID: 8744110584588356483}
   m_Layer: 0
@@ -261,22 +274,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &3951999541538106007
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3951999541538106000}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 20, y: -15}
-  serializedVersion: 2
-  m_Radius: 70
 --- !u!114 &3951999541538106004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,11 +286,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 977de6998d76e0348b8ba67e9e25bb2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ItemUI: {fileID: 8544151398635534400, guid: b8c05aab0755e834ba3c4b8df78d18d3, type: 3}
   maxSpeed: 250
   Fireball: {fileID: 589938780384607427, guid: 2bff7c08fa4e96449b382d3249068002, type: 3}
   HPBar: {fileID: 0}
   DamageSound: {fileID: 7317727857031626995}
-  WaterSound: {fileID: 69242354}
+--- !u!70 &8963296817831707474
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3951999541538106000}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 4.396118, y: -9.399719}
+  m_Size: {x: 55.821655, y: 95.48503}
+  m_Direction: 0
 --- !u!82 &1703214888
 AudioSource:
   m_ObjectHideFlags: 0
@@ -412,6 +425,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8098829370492056910}
   - component: {fileID: 2881839898076596298}
+  - component: {fileID: 2108310999}
   m_Layer: 0
   m_Name: Damage
   m_TagString: Untagged
@@ -530,3 +544,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2108310999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7317727857031626995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d712de9724f4b124c9075b682925d910, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

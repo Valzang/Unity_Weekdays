@@ -18,7 +18,6 @@ public class Score : MonoBehaviour
 
     void onClickOK()
     {
-        print("들어오나?");
         ShootingGameManager.Instance.ChangeScene("2D_Login");
     }
 }

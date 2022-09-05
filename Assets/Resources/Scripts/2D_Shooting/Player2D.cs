@@ -18,8 +18,6 @@ public class Player2D : MonoBehaviour
     private Image HPBar;
     [SerializeField]
     private GameObject DamageSound = null;
-    [SerializeField]
-    private GameObject WaterSound = null;
 
 
     private float curSpeed = 0.0f;
@@ -38,6 +36,11 @@ public class Player2D : MonoBehaviour
     
     void Update()
     {
+        if(ShootingGameManager.Instance.Player_HP<100.0f)
+        { 
+            ShootingGameManager.Instance.Player_HP += ShootingGameManager.Instance.selfHeal;
+            HPBar.fillAmount = (float)(ShootingGameManager.Instance.Player_HP / 100.0f);
+        }
         if (ShootingGameManager.Instance.Getting_Money != 100)
         {
             DoubleMoney_Time += Time.deltaTime;
@@ -55,6 +58,10 @@ public class Player2D : MonoBehaviour
     private void FixedUpdate()
     {
         curSpeed = maxSpeed * ShootingGameManager.Instance.Player_SpeedRatio;
+        if(ShootingGameManager.Instance.Player_Life)
+            HPBar.color = new Color(0, 242, 255, 255);
+        else if(HPBar.color != new Color(77,255,0, 255))
+            HPBar.color = new Color(77, 255, 0, 255);
         Move_2D();
     }
 
@@ -72,16 +79,12 @@ public class Player2D : MonoBehaviour
             || (position.y > -225.0f && y < 0))
             position.y += (y * curSpeed * Time.deltaTime);
 
-        //position = new Vector3(position.x + (x * maxSpeed * Time.deltaTime),
-        //                        position.y + (y * maxSpeed * Time.deltaTime),
-        //                        position.z);
-
         rigidBody.MovePosition(position);
     }
 
     void Attack()
     {
-        if(Input.GetKeyDown(KeyCode.LeftControl) && Fireball_Cooltime >= ShootingGameManager.Instance.Fireball_time)
+        if(Input.GetKey(KeyCode.LeftControl) && Fireball_Cooltime >= ShootingGameManager.Instance.Fireball_time)
         {
             Vector3 curPos = transform.position;
             curPos.x += 80;
@@ -103,8 +106,14 @@ public class Player2D : MonoBehaviour
                 GetDamage(25);
                 break;
             case "Obstacle":
-                //WaterSound.GetComponent<AudioSource>().Play();
-                GetDamage(10);                
+                print(collision.gameObject.name);
+                if (collision.gameObject.name == "DeathBall(Clone)")
+                { 
+                    print("데스볼에 맞음 !!!!!!!!!!!!!!!!!!");
+                    GetDamage(30);
+                }
+                else
+                    GetDamage(15);                
 
                 Destroy(collision.gameObject);
                 break;
@@ -116,7 +125,7 @@ public class Player2D : MonoBehaviour
         DamageSound.GetComponent<AudioSource>().Play();
         ShootingGameManager.Instance.Player_HP -= _Damage;
         print(ShootingGameManager.Instance.Player_HP);
-        HPBar.fillAmount = ShootingGameManager.Instance.Player_HP / 100.0f;
+        HPBar.fillAmount = (float)(ShootingGameManager.Instance.Player_HP / 100.0f);
         StartCoroutine(Flick());
         if (ShootingGameManager.Instance.Player_HP <= 0)
         { 

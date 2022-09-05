@@ -12,9 +12,9 @@ public class ChoiceUI : MonoBehaviour
     public GameObject Item_FireballSpeedUp;
     public GameObject Item_Fireball_Increase;
     public GameObject Item_PlayerLife_Increase;
+    public GameObject Item_SelfHeal;
     public GameObject Item_Fireball_Pierce;
 
-    // Start is called before the first frame update
 
     enum Item_List
     {
@@ -24,7 +24,9 @@ public class ChoiceUI : MonoBehaviour
         FireballSpeedUp = 3,
         Fireball_Increase = 4,
         PlayerLife_Increase = 5,
-        Fireball_Pierce = 6
+        SelfHeal = 6,
+        Fireball_Pierce = 7,
+        End = 8
     }
     void Start()
     {
@@ -32,7 +34,7 @@ public class ChoiceUI : MonoBehaviour
         ShootingGameManager.Instance.isTimeStop = true;
         Time.timeScale = 0.0f;
 
-        int random_value = Random.Range(0, 6);
+        int random_value = Random.Range(0, (int)Item_List.Fireball_Pierce);
         int Pierce_Prob = Random.Range(0, 100);
         RandomItem.Add(random_value);
 
@@ -40,12 +42,12 @@ public class ChoiceUI : MonoBehaviour
         {
             while (RandomItem.Contains(random_value))
             {
-                random_value = Random.Range(0, 6);
+                random_value = Random.Range(0, (int)Item_List.Fireball_Pierce);
             }
             RandomItem.Add(random_value);            
         }
 
-        if (Pierce_Prob < 10)
+        if (Pierce_Prob < 10 && ShootingGameManager.Instance.Fireball_Pierce == false)
         {
             RandomItem.RemoveAt(2);
             RandomItem.Add((int)Item_List.Fireball_Pierce);
@@ -89,6 +91,9 @@ public class ChoiceUI : MonoBehaviour
                 case (int)Item_List.PlayerLife_Increase:
                     Instantiate(Item_PlayerLife_Increase, curPos, transform.rotation, this.gameObject.transform);
                     break;
+                case (int)Item_List.SelfHeal:
+                    Instantiate(Item_SelfHeal, curPos, transform.rotation, this.gameObject.transform);
+                    break;
                 case (int)Item_List.Fireball_Pierce:
                     Instantiate(Item_Fireball_Pierce, curPos, transform.rotation, this.gameObject.transform);
                     break;
@@ -101,53 +106,5 @@ public class ChoiceUI : MonoBehaviour
         Time.timeScale = 1.0f;
         ShootingGameManager.Instance.isTimeStop = false;
         Destroy(this.gameObject);
-    }
-
-    void onClick_Healing()
-    {
-        if (ShootingGameManager.Instance.Player_HP >= 70)
-            ShootingGameManager.Instance.Player_HP = 100;
-        else
-            ShootingGameManager.Instance.Player_HP += 30;
-
-        ShootingGameManager.Instance.Player_Money -= 500;
-        Back();
-    }
-    void onClick_DoubleMoney()
-    {
-        if(ShootingGameManager.Instance.Getting_Money == 100)
-        {
-            ShootingGameManager.Instance.Getting_Money = 200;
-            ShootingGameManager.Instance.Player_Money -= 500;
-        }        
-        Back();
-    }
-    void onClick_PlayerSpeedUp()
-    {
-        ShootingGameManager.Instance.Player_SpeedRatio += 0.1f;
-        ShootingGameManager.Instance.Player_Money -= 500;
-        Back();
-    }
-    void onClick_FireballSpeedUp()
-    {
-        ShootingGameManager.Instance.Fireball_time *= 0.9f;
-        ShootingGameManager.Instance.Player_Money -= 1000;
-        Back();
-    }
-    void onClick_Fireball_Increase()
-    {
-
-    }
-    void onClick_PlayerLife_Increase()
-    {
-        ShootingGameManager.Instance.Player_Life = true;
-        ShootingGameManager.Instance.Player_Money -= 5000;
-        Back();
-    }
-    void onClick_Fireball_Pierce()
-    {
-        ShootingGameManager.Instance.Fireball_Pierce = true;
-        ShootingGameManager.Instance.Player_Money -= 5000;
-        Back();
     }
 }

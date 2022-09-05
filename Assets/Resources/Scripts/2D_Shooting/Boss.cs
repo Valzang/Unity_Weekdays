@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Boss : MonoBehaviour
@@ -11,16 +12,23 @@ public class Boss : MonoBehaviour
     private float maxSpeed = 250.0f;
     [SerializeField]
     private GameObject AttackProj = null;
+    [SerializeField]
+    public Image HPBar = null;
+    [SerializeField]
+    public GameObject DamageObj = null;
 
+    private float HP = 100.0f;
     private float Attack_Cooltime = 1.5f;
     private float Projectile_Angle = 80.0f;
     private float deltaAngle = 7.5f;
     private float delta_Y;
+    private AudioSource DamageSound = null;
 
     void Start()
     {
         delta_Y = maxSpeed / 1.5f * Time.deltaTime;
         rigidBody = GetComponent<Rigidbody2D>();
+        DamageSound = DamageObj.GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -42,9 +50,9 @@ public class Boss : MonoBehaviour
             curPos.x += 5;
             curPos.y += 20;
             curRot.z += Projectile_Angle;
-            if (Projectile_Angle < -80.0f)
+            if (Projectile_Angle < -60.0f)
                 deltaAngle = 7.5f;
-            else if (Projectile_Angle > 80.0f)
+            else if (Projectile_Angle > 60.0f)
                 deltaAngle = -7.5f;
 
             Instantiate(AttackProj, curPos, Quaternion.Euler(curRot));
@@ -61,6 +69,7 @@ public class Boss : MonoBehaviour
 
         if (transform.position.x >= 330.0f)
             position.x -= maxSpeed * Time.deltaTime;
+            
 
        
         if (position.y > 8.5f)
@@ -73,4 +82,22 @@ public class Boss : MonoBehaviour
         if (position.x <= -480.0f)
             Destroy(this.gameObject);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Projectiles"))
+        {
+            HP -= 7.0f;
+            if (HP <= 0.0f)
+            {
+                ShootingGameManager.Instance.Player_Score += 3000;
+                Destroy(this.gameObject);
+                return;
+            }
+            HPBar.fillAmount = HP / 100.0f;
+            DamageSound.Play();
+        }
+    }
+
 }
+

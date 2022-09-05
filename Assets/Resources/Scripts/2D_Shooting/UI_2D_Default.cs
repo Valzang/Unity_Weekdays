@@ -16,6 +16,7 @@ public class UI_2D_Default : MonoBehaviour
     private GameObject DM_Text = null;
 
     public Image imgHPBar;
+    public Text curHP;
 
     private float First_DoubleTime = 60.0f;
 
@@ -48,6 +49,7 @@ public class UI_2D_Default : MonoBehaviour
             DoubleMoney_Obj.SetActive(false);
             First_DoubleTime = 60.0f;
         }
+        curHP.text = ((float)ShootingGameManager.Instance.Player_HP).ToString();
     }
 
     public void ShowHPBar(int hp)

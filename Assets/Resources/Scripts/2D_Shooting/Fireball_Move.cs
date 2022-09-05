@@ -46,6 +46,11 @@ public class Fireball_Move : MonoBehaviour
             if(ShootingGameManager.Instance.Fireball_Pierce == false)
                 Destroy(this.gameObject);
         }
-        
+        else if (collision.CompareTag("Enemy_Boss"))
+        {
+            Instantiate(Explosion, collision.transform.position, collision.transform.rotation);
+            if (ShootingGameManager.Instance.Fireball_Pierce == false)
+                Destroy(this.gameObject);
+        }
     }
 }

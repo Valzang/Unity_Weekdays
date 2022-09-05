@@ -17,6 +17,7 @@ public class Enemy_Move : MonoBehaviour
 
     void Start()
     {
+        waterBall_Cooltime = ShootingGameManager.Instance.waterball_time;
         rigidBody = GetComponent<Rigidbody2D>();
     }
 
@@ -26,7 +27,15 @@ public class Enemy_Move : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        Move_2D();
+        if(rigidBody.transform.position.x >= 315.0f)
+            Move_2D();
+        if (ShootingGameManager.Instance.BossPhase != ShootingGameManager.Instance.prev_BossPhase)
+        {
+            if(ShootingGameManager.Instance.waterball_time > 0.2f)
+                ShootingGameManager.Instance.waterball_time -= 0.1f;
+            ++ShootingGameManager.Instance.prev_BossPhase;
+        }
+            
     }
 
     void Attack()
