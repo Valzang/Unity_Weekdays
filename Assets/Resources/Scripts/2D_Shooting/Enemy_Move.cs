@@ -13,22 +13,23 @@ public class Enemy_Move : MonoBehaviour
     private GameObject Waterball = null;
 
     private float waterBall_Cooltime = 1.5f;
-
+    private float delta_Y;
 
     void Start()
     {
         waterBall_Cooltime = ShootingGameManager.Instance.waterball_time;
         rigidBody = GetComponent<Rigidbody2D>();
+        int random = Random.Range(0, 2);
+        delta_Y = random ==0 ? maxSpeed*1.2f * Time.deltaTime : -maxSpeed * 1.2f * Time.deltaTime;
     }
 
     private void Update()
     {
+        Move_2D();
         Attack();
     }
     private void FixedUpdate()
     {
-        if(rigidBody.transform.position.x >= 315.0f)
-            Move_2D();
         if (ShootingGameManager.Instance.BossPhase != ShootingGameManager.Instance.prev_BossPhase)
         {
             if(ShootingGameManager.Instance.waterball_time > 0.2f)
@@ -58,12 +59,17 @@ public class Enemy_Move : MonoBehaviour
     void Move_2D()
     {
         Vector3 position = rigidBody.transform.position;
-        position = new Vector3(position.x + (-maxSpeed * Time.deltaTime),
-                                position.y,
-                                position.z);
+
+        if (transform.position.x >= 330.0f)
+            position.x -= maxSpeed * Time.deltaTime;
+
+        if (position.y > 124.5f)
+            delta_Y *= -1.0f;
+        else if (position.y < -240.0f)
+            delta_Y *= -1.0f;
+        position.y += delta_Y;        
+
         rigidBody.MovePosition(position);
-        if (position.x <= -480.0f)
-            Destroy(this.gameObject);
     }
 
 }

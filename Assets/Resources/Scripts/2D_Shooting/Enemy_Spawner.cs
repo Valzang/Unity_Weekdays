@@ -35,7 +35,7 @@ public class Enemy_Spawner : MonoBehaviour
         {
             ShootingGameManager.Instance.isBoss = true;
             StopInvoke();
-            Vector3 curPos = new(440, 0, 0);
+            Vector3 curPos = new(500, 0, 0);
             Instantiate(bossObj, curPos, transform.rotation);
             ++ShootingGameManager.Instance.BossPhase;
             print("현재 보스 단계 : " + ShootingGameManager.Instance.BossPhase);
@@ -60,7 +60,7 @@ public class Enemy_Spawner : MonoBehaviour
         if (wolfObj != null)
         {
             float random = Random.Range(-185, 91);
-            Vector3 curPos = new(440, random, 0);
+            Vector3 curPos = new(500, random, 0);
             Instantiate(wolfObj, curPos, transform.rotation);
         }
     }

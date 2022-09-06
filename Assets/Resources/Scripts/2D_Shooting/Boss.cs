@@ -69,8 +69,6 @@ public class Boss : MonoBehaviour
 
         if (transform.position.x >= 330.0f)
             position.x -= maxSpeed * Time.deltaTime;
-            
-
        
         if (position.y > 8.5f)
             delta_Y *= -1.0f;
@@ -79,8 +77,6 @@ public class Boss : MonoBehaviour
         position.y += delta_Y;
 
         rigidBody.MovePosition(position);
-        if (position.x <= -480.0f)
-            Destroy(this.gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
