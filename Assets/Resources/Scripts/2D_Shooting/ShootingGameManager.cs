@@ -26,8 +26,9 @@ public class ShootingGameManager : MonoBehaviour
     // 파이어볼 관련
     public float Fireball_time = 1.0f;
     public bool Fireball_Pierce = false;
+    public float Fireball_size = 1.0f;
 
-    // 파이어볼 관련
+    // 워터볼 관련
     public float waterball_time = 1.5f;
 
     //보스

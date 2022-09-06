@@ -13,10 +13,13 @@ public class Fireball_Move : MonoBehaviour
     [SerializeField]
     private GameObject coinObj = null;
 
-    // Start is called before the first frame update
+
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
+        float size = ShootingGameManager.Instance.Fireball_size;
+        Vector3 lScale = this.gameObject.transform.localScale;
+        this.gameObject.transform.localScale = new Vector3(lScale.x * size, lScale.y * size, lScale.z * size);
     }
 
    

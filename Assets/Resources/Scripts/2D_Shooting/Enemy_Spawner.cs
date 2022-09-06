@@ -21,7 +21,7 @@ public class Enemy_Spawner : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Cooltime > 1.0f && ShootingGameManager.Instance.Player_Score >= Reduce_Cooltime)
+        if (Cooltime > 0.5f && ShootingGameManager.Instance.Player_Score >= Reduce_Cooltime)
         { 
             Reduce_Cooltime += 1500;
             Cooltime -= 0.06f;

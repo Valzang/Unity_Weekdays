@@ -13,9 +13,9 @@ public class Boss : MonoBehaviour
     [SerializeField]
     private GameObject AttackProj = null;
     [SerializeField]
-    public Image HPBar = null;
+    private Image HPBar = null;
     [SerializeField]
-    public GameObject DamageObj = null;
+    private GameObject DamageObj = null;
 
     private float HP = 100.0f;
     private float Attack_Cooltime = 1.5f;

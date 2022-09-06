@@ -14,7 +14,7 @@ public class ChoiceUI : MonoBehaviour
     public GameObject Item_PlayerLife_Increase;
     public GameObject Item_SelfHeal;
     public GameObject Item_Fireball_Pierce;
-
+    public GameObject Item_FireballBigger;
 
     enum Item_List
     {
@@ -25,8 +25,9 @@ public class ChoiceUI : MonoBehaviour
         Fireball_Increase = 4,
         PlayerLife_Increase = 5,
         SelfHeal = 6,
-        Fireball_Pierce = 7,
-        End = 8
+        FireballBigger = 7,
+        Fireball_Pierce = 8,
+        End = 9
     }
     void Start()
     {
@@ -96,6 +97,9 @@ public class ChoiceUI : MonoBehaviour
                     break;
                 case (int)Item_List.Fireball_Pierce:
                     Instantiate(Item_Fireball_Pierce, curPos, transform.rotation, this.gameObject.transform);
+                    break;
+                case (int)Item_List.FireballBigger:
+                    Instantiate(Item_FireballBigger, curPos, transform.rotation, this.gameObject.transform);
                     break;
             }
         }

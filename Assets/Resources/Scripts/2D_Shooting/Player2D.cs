@@ -39,6 +39,8 @@ public class Player2D : MonoBehaviour
         if(ShootingGameManager.Instance.Player_HP<100.0f)
         { 
             ShootingGameManager.Instance.Player_HP += ShootingGameManager.Instance.selfHeal;
+            if (ShootingGameManager.Instance.Player_HP > 100.0f)
+                ShootingGameManager.Instance.Player_HP = 100.0f;
             HPBar.fillAmount = (float)(ShootingGameManager.Instance.Player_HP / 100.0f);
         }
         if (ShootingGameManager.Instance.Getting_Money != 100)

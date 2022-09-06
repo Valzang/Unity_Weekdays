@@ -131,6 +131,8 @@ MonoBehaviour:
     type: 3}
   Item_Fireball_Pierce: {fileID: 1534791475036769445, guid: 2c243371c131e0a44bd4b03428b1b243,
     type: 3}
+  Item_FireballBigger: {fileID: 8728005744251880674, guid: bcbf0ae9446b918438c9f01339e091a9,
+    type: 3}
 --- !u!1 &8544151399496070915
 GameObject:
   m_ObjectHideFlags: 0
@@ -274,7 +276,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 70ba17e55fd5615499ab72ae96e75cd0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e02da1f09abdded4dbe87401ab2eccb2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
