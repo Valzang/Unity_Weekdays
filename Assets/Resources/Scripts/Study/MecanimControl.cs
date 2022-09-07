@@ -50,4 +50,9 @@ public class MecanimControl : MonoBehaviour
 
         pcController.Move(runSpeed * Time.deltaTime * direction);
     }
+
+    void onSlideKick()
+    {
+        print("슬라이드 중");
+    }
 }

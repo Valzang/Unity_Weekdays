@@ -229,29 +229,7 @@ public class PlayerController : MonoBehaviour
         }        
     }
 
-    /*
-    private void CharacterControl()
-    {
-        Velocity = new Vector3(Input.GetAxis("Horizontal"),
-            0,
-            Input.GetAxis("Vertical"));
-
-        Velocity *= runSpeed;
-
-        if(Velocity.magnitude > 0.5f)
-        {
-            spartanKing.CrossFade("run", 0.3f);
-            transform.LookAt(transform.position + Velocity);
-        }
-        else
-        {
-            spartanKing.CrossFade("idle", 0.3f);
-        }
-
-        //pcControl.Move(Velocity * Time.deltaTime + Physics.gravity * 0.01f);
-        pcControl.SimpleMove(Velocity);
-    }
-    */
+    
     private void CharacterControl_Slerp()
     {
         if (spartanKing.IsPlaying("attack"))
@@ -274,34 +252,6 @@ public class PlayerController : MonoBehaviour
         {
             transform.Rotate(0.0f,1.0f,0.0f);
         }
-
-        /*
-        Vector3 direction = new Vector3(Input.GetAxis("Horizontal"),
-            0,
-            Input.GetAxis("Vertical"));
-
-        //direction *= runSpeed;
-
-        if (direction.sqrMagnitude > 0.01f)
-        {
-            spartanKing.CrossFade("run", 0.3f);
-
-            Vector3 Forward = Vector3.Slerp(
-                transform.forward, 
-                direction, 
-                rotationSpeed * Time.deltaTime / Vector3.Angle(transform.forward, direction)
-                );
-
-            transform.LookAt(transform.position + Forward);
-        }
-        else if(spartanKing.IsPlaying("attack") != true)
-        {
-            spartanKing.CrossFade("idle", 0.3f);
-        }
-
-        pcControl.SimpleMove(direction * runSpeed);
-        //pcControl.Move(direction * runSpeed * Time.deltaTime + Physics.gravity * 0.01f);
-        */
     }
 
     void RotateView()
