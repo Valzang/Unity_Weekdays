@@ -43,8 +43,40 @@ public class CryptoContorller : MonoBehaviour
 
     void Attack()
     {
-        if (Input.GetKeyDown(KeyCode.F) || Input.GetMouseButton(0))
-            animator.SetTrigger("Attack");
+        if(Sword.activeSelf)
+        {
+            if (Input.GetKeyDown(KeyCode.F) || Input.GetMouseButton(0))
+            {
+                animator.SetTrigger("Attack");
+            }
+        }
+        else if(Bow.activeSelf)
+        {            
+            if (Input.GetKeyDown(KeyCode.F) || Input.GetMouseButton(0))
+            {
+                if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Ready"))
+                { 
+                    animator.SetTrigger("Attack_Fire");
+                    animator.SetBool("Attack_Ready", false);
+                }
+                else
+                    animator.SetBool("Attack_Ready",true);
+            }
+        }
+        //else if(Gun.activeSelf)
+        //{
+        //    if (Input.GetKeyDown(KeyCode.F) || Input.GetMouseButton(0))
+        //    {
+        //        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Ready"))
+        //        {
+        //            animator.SetTrigger("Attack_Fire");
+        //            animator.SetBool("Attack_Ready", false);
+        //        }
+        //        else
+        //            animator.SetBool("Attack_Ready", true);
+        //    }
+        //}
+        
     }
 
     void WeaponChange()
@@ -55,6 +87,7 @@ public class CryptoContorller : MonoBehaviour
             if (animator.runtimeAnimatorController.name != swordAnimator.runtimeAnimatorController.name)
             {
                 animator.runtimeAnimatorController = swordAnimator.runtimeAnimatorController;
+                Bow.SetActive(false);
                 Sword.SetActive(true);
             }
             else
@@ -68,18 +101,33 @@ public class CryptoContorller : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             if (animator.runtimeAnimatorController.name != bowAnimator.runtimeAnimatorController.name)
+            {
                 animator.runtimeAnimatorController = bowAnimator.runtimeAnimatorController;
+                Sword.SetActive(false);
+                Bow.SetActive(true);
+            }
+                
             else
+            {
                 animator.runtimeAnimatorController = idleAnimator.runtimeAnimatorController;
+                Bow.SetActive(false);
+            }
+                
         }
 
         // ÃÑ
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             if (animator.runtimeAnimatorController.name != gunAnimator.runtimeAnimatorController.name)
+            {
                 animator.runtimeAnimatorController = gunAnimator.runtimeAnimatorController;
+                Gun.SetActive(true);
+            }
             else
+            {
                 animator.runtimeAnimatorController = idleAnimator.runtimeAnimatorController;
+                Gun.SetActive(false);
+            }
         }
     }
 
@@ -128,5 +176,11 @@ public class CryptoContorller : MonoBehaviour
         Sword.transform.GetChild(0).transform.gameObject.GetComponent<BoxCollider>().enabled = false;
         print(Sword.transform.GetChild(0).transform.gameObject.GetComponent<BoxCollider>().name);
         print("°Ë ÄÝ¸®Àü OFF");
+    }
+
+    void FireArrow()
+    {
+        Vector3 ArrowDirection = Bow.transform.rotation * Vector3.left;
+        Instantiate(Arrow, Bow.transform.position, Quaternion.LookRotation(ArrowDirection));
     }
 }
