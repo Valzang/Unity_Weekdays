@@ -8,6 +8,9 @@ public class CryptoContorller : MonoBehaviour
     [Range(0,10)]
     private float Mouse_Sensitivity = 4.5f;
 
+    [SerializeField]
+    private GameObject GunSound = null;
+
     public float runSpeed = 6.0f;
     public float rotationSpeed = 360.0f;
 
@@ -36,9 +39,21 @@ public class CryptoContorller : MonoBehaviour
     {        
         animator.SetFloat("Speed", pcController.velocity.magnitude);
         CharacterControl_Slerp();
+        Sit();
         Attack();
         WeaponChange();
         RotateView();
+    }
+
+    void Sit()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            if(animator.GetBool("Sit"))
+                animator.SetBool("Sit", false);
+            else
+                animator.SetBool("Sit", true);
+        }
     }
 
     void Attack()
@@ -54,7 +69,8 @@ public class CryptoContorller : MonoBehaviour
         {            
             if (Input.GetKeyDown(KeyCode.F) || Input.GetMouseButton(0))
             {
-                if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Ready"))
+                if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Ready")
+                    || animator.GetCurrentAnimatorStateInfo(0).IsName("Run_Ready"))
                 { 
                     animator.SetTrigger("Attack_Fire");
                     animator.SetBool("Attack_Ready", false);
@@ -63,19 +79,13 @@ public class CryptoContorller : MonoBehaviour
                     animator.SetBool("Attack_Ready",true);
             }
         }
-        //else if(Gun.activeSelf)
-        //{
-        //    if (Input.GetKeyDown(KeyCode.F) || Input.GetMouseButton(0))
-        //    {
-        //        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Ready"))
-        //        {
-        //            animator.SetTrigger("Attack_Fire");
-        //            animator.SetBool("Attack_Ready", false);
-        //        }
-        //        else
-        //            animator.SetBool("Attack_Ready", true);
-        //    }
-        //}
+        else if(Gun.activeSelf)
+        {
+            if (Input.GetKeyDown(KeyCode.F) || Input.GetMouseButton(0))
+            {
+                animator.SetTrigger("Attack_Gun");
+            }
+        }
         
     }
 
@@ -87,6 +97,7 @@ public class CryptoContorller : MonoBehaviour
             if (animator.runtimeAnimatorController.name != swordAnimator.runtimeAnimatorController.name)
             {
                 animator.runtimeAnimatorController = swordAnimator.runtimeAnimatorController;
+                Gun.SetActive(false);
                 Bow.SetActive(false);
                 Sword.SetActive(true);
             }
@@ -103,8 +114,9 @@ public class CryptoContorller : MonoBehaviour
             if (animator.runtimeAnimatorController.name != bowAnimator.runtimeAnimatorController.name)
             {
                 animator.runtimeAnimatorController = bowAnimator.runtimeAnimatorController;
-                Sword.SetActive(false);
+                Gun.SetActive(false);
                 Bow.SetActive(true);
+                Sword.SetActive(false);
             }
                 
             else
@@ -122,6 +134,8 @@ public class CryptoContorller : MonoBehaviour
             {
                 animator.runtimeAnimatorController = gunAnimator.runtimeAnimatorController;
                 Gun.SetActive(true);
+                Bow.SetActive(false);
+                Sword.SetActive(false);
             }
             else
             {
@@ -183,4 +197,10 @@ public class CryptoContorller : MonoBehaviour
         Vector3 ArrowDirection = Bow.transform.rotation * Vector3.left;
         Instantiate(Arrow, Bow.transform.position, Quaternion.LookRotation(ArrowDirection));
     }
+
+    void GunFire_Sound()
+    {
+        GunSound.GetComponent<AudioSource>().Play();
+    }
+    
 }
