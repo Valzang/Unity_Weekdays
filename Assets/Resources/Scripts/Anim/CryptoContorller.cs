@@ -60,16 +60,16 @@ public class CryptoContorller : MonoBehaviour
     {
         if(Sword.activeSelf)
         {
-            if (Input.GetKeyDown(KeyCode.F) || Input.GetMouseButton(0))
+            if (Input.GetKeyDown(KeyCode.F))
             {
                 animator.SetTrigger("Attack");
             }
         }
         else if(Bow.activeSelf)
         {            
-            if (Input.GetKeyDown(KeyCode.F) || Input.GetMouseButton(0))
+            if (Input.GetKeyDown(KeyCode.F))
             {
-                if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack_Ready")
+                if (animator.GetBool("Attack_Ready")
                     || animator.GetCurrentAnimatorStateInfo(0).IsName("Run_Ready"))
                 { 
                     animator.SetTrigger("Attack_Fire");
@@ -81,7 +81,7 @@ public class CryptoContorller : MonoBehaviour
         }
         else if(Gun.activeSelf)
         {
-            if (Input.GetKeyDown(KeyCode.F) || Input.GetMouseButton(0))
+            if (Input.GetKeyDown(KeyCode.F))
             {
                 animator.SetTrigger("Attack_Gun");
             }
