@@ -16,8 +16,6 @@ public class Enemy : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
     }
-
-
     void Update()
     {
         if(MazeManager.Instance.isEnemyStun)
