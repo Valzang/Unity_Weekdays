@@ -39,9 +39,9 @@ public class CryptoContorller : MonoBehaviour
     {
         animator.SetFloat("Speed", pcController.velocity.magnitude);
         CharacterControl_Slerp();
-        Sit();
+        //Sit();
         Attack();
-        WeaponChange();
+        //WeaponChange();
         RotateView();
     }
 
