@@ -12,6 +12,7 @@ TagManager:
   - Item
   - Enemy_Boss
   - Projectiles
+  - Sword
   layers:
   - Default
   - TransparentFX

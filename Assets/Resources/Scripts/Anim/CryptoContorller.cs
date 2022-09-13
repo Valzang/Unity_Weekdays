@@ -36,7 +36,7 @@ public class CryptoContorller : MonoBehaviour
     }
 
     void Update()
-    {        
+    {
         animator.SetFloat("Speed", pcController.velocity.magnitude);
         CharacterControl_Slerp();
         Sit();
@@ -161,7 +161,7 @@ public class CryptoContorller : MonoBehaviour
         {
             transform.Rotate(0.0f, 1.0f, 0.0f);
         }   
-        pcController.Move(runSpeed * Time.deltaTime * direction);
+        pcController.SimpleMove(runSpeed * direction);
     }
 
     void RotateView()
@@ -202,5 +202,14 @@ public class CryptoContorller : MonoBehaviour
     {
         GunSound.GetComponent<AudioSource>().Play();
     }
-    
+
+    private void OnTriggerStay(Collider other)
+    {
+        if(other.CompareTag("Enemy"))
+        {
+            if(!MazeManager.Instance.isEnemyStun)
+                MazeManager.Instance.Player_HP -= 10 * Time.deltaTime;
+        }
+    }
+
 }

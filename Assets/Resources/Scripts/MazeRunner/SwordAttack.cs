@@ -8,8 +8,7 @@ public class SwordAttack : MonoBehaviour
     {
         if(other.CompareTag("Enemy"))
         {
-            print("적은 파괴한다");
-            Destroy(other.gameObject);
+            print("적 스턴");
         }
     }
 }
