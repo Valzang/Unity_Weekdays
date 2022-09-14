@@ -3753,6 +3753,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemSpawner: {fileID: 1825557112}
+  playerObj: {fileID: 840322788}
 --- !u!1 &994755372
 GameObject:
   m_ObjectHideFlags: 0
