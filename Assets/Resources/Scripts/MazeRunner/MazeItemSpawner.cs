@@ -10,7 +10,7 @@ public class MazeItemSpawner : MonoBehaviour
     {
         for (int i=0; i<3; ++i)
         {
-            int temp = Random.Range(0, 8);
+            int temp = Random.Range(0, 8);            
 
             // 겹치지 않게 중복이면 계속 랜덤 돌리기
             while(randSpawner.Contains(temp))
@@ -23,11 +23,6 @@ public class MazeItemSpawner : MonoBehaviour
             this.gameObject.transform.GetChild(randSpawner[i]).gameObject.SetActive(true);
         }        
         
-        
-    }
-
-    void Update()
-    {
         
     }
 }

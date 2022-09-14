@@ -59,4 +59,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Resources/Scenes/Assignment/#5 2D_Shooting/2D_Score.unity
     guid: f9069396981bdb144b470eb7e740a020
+  - enabled: 1
+    path: Assets/Resources/Scenes/Assignment/#6 MazeRunner/MazeRunner.unity
+    guid: 418a06389fab9c5428d23a195806e52d
+  - enabled: 1
+    path: Assets/Resources/Scenes/Assignment/#6 MazeRunner/Escape.unity
+    guid: e896dff985c71424692393d04209dd7e
+  - enabled: 1
+    path: Assets/Resources/Scenes/Assignment/#6 MazeRunner/MazeMain.unity
+    guid: 32ea6d63c6d06bc4a9e4740a28b36c63
   m_configObjects: {}

@@ -8,7 +8,6 @@ public class UI_Runner : MonoBehaviour
     [SerializeField]
     private GameObject OptionUI = null;
 
-    public GameObject ID_Obj = null;
     public GameObject itemLeft = null;
 
     private GameObject DM_Text = null;
@@ -19,11 +18,6 @@ public class UI_Runner : MonoBehaviour
 
     void Start()
     {
-        if (MazeManager.Instance.ID_text != null && MazeManager.Instance.ID_text != "")
-            ID_Obj.GetComponent<Text>().text = MazeManager.Instance.ID_text;
-        else
-            ID_Obj.GetComponent<Text>().text = "Test01";
-
         ShowHPBar(100);
         OptionUI.SetActive(false);
     }
@@ -49,11 +43,5 @@ public class UI_Runner : MonoBehaviour
             MazeManager.Instance.isTimeStop = true;
             OptionUI.SetActive(true);
         }
-    }
-
-    void test1()
-    {
-        Debug.Log("test1 Check");
-        return;
     }
 }

@@ -13,7 +13,6 @@ public class MazeItem : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.name + "°ú Á¢ÃË");
         if(other.CompareTag("Player"))
         {
             --MazeManager.Instance.itemLeft;

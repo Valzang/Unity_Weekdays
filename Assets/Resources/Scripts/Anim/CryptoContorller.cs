@@ -41,8 +41,9 @@ public class CryptoContorller : MonoBehaviour
         CharacterControl_Slerp();
         //Sit();
         Attack();
-        //WeaponChange();
+        WeaponChange();
         RotateView();
+        MazeManager.Instance.PlayTime += Time.deltaTime;
     }
 
     void Sit()
