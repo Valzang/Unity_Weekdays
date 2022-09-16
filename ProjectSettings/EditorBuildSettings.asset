@@ -18,8 +18,38 @@ EditorBuildSettings:
     path: Assets/Resources/Scenes/Study/03 Game.unity
     guid: 8fdc0af5f7cffe247a3dd435a7418aa9
   - enabled: 1
+    path: Assets/Resources/Scenes/Study/22 GameTitle.unity
+    guid: d17bffd08b3bb824b93b243fbe0ab08e
+  - enabled: 1
     path: Assets/Resources/Scenes/Study/99 End.unity
     guid: 7d7228554ff6c614381fef68372a9c06
+  - enabled: 1
+    path: Assets/Resources/Scenes/Study/04 RayCast.unity
+    guid: 9e1e230c074b7a646854987f6e92b90b
+  - enabled: 1
+    path: Assets/Resources/Scenes/Study/06 Camera.unity
+    guid: 8f2e07bbf8fa88e49a51d803985d2590
+  - enabled: 1
+    path: Assets/Resources/Scenes/Study/07 LegacyAnimation.unity
+    guid: f95eb1ecb186f384f9162dd7415deb15
+  - enabled: 1
+    path: Assets/Resources/Scenes/Study/08 2DProj.unity
+    guid: 3c996d220fc933045b620a4172d5dd5f
+  - enabled: 1
+    path: Assets/Resources/Scenes/Study/09 MecanimAnimation.unity
+    guid: 7fa896a307d8f284b915c4b84bc4cc81
+  - enabled: 1
+    path: Assets/Resources/Scenes/Study/10 Terrain.unity
+    guid: 3190a82daa2b0484ca6ed9f62d81b3df
+  - enabled: 1
+    path: Assets/Resources/Scenes/Study/11 Save&Load.unity
+    guid: b0703ffae0449b74999d656c12902e53
+  - enabled: 1
+    path: Assets/Resources/Scenes/Study/12 LoadingScene.unity
+    guid: 5979fd5c24f61124da6e1e1649e74dbc
+  - enabled: 1
+    path: Assets/Resources/Scenes/Study/98 UnitTest.unity
+    guid: 5197e11809c389a459d17e0a7c5f8a76
   - enabled: 1
     path: Assets/Resources/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
