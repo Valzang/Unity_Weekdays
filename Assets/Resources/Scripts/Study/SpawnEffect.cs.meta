@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 0dba6bfbd03cbbe43b288c9954d2784d
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _renderer: {fileID: -4277760611513043768, guid: 08dc17a60bdae034194e2adaea3e28c6,
+      type: 3}
+  - mtrlOrg: {fileID: 2100000, guid: 2dce7c132b8ac6141a4378a37a219af4, type: 2}
+  - mtrlDissolve: {fileID: 2100000, guid: 82690ab3f6383414ab81aea18106119f, type: 2}
+  - mtrlPhase: {fileID: 2100000, guid: d682c4abb0f0a184aa1f9f163d5fa355, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
