@@ -22,13 +22,13 @@ public class PhotonGameManager : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
-    // Start is called before the first frame update
+
     void Start()
     {
-        StartCoroutine(CreatePlayer());
+        //StartCoroutine(CreatePlayer());
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         

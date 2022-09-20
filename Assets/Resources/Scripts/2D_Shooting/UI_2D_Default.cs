@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -64,7 +65,6 @@ public class UI_2D_Default : MonoBehaviour
             Time.timeScale = 0.0f;
             ShootingGameManager.Instance.isTimeStop = true;
             OptionUI.SetActive(true);
-        }
-        
+        }        
     }
 }
