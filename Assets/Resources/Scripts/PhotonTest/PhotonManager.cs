@@ -2,11 +2,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
 
+// MonoBehaviourPun : Callback 함수 같은것들을 오버라이드 할 수 없음
 public class PhotonManager : MonoBehaviourPunCallbacks
 {
+    //싱글톤
+    public static PhotonManager instance = null;
+
     //버전 입력
     private readonly string version = "1.0";
 
@@ -16,29 +22,38 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     //아이디 겹칠 때를 위한
     private string name_number = "";
 
+    [Header("DisconnectPanel")]
+    //public GameObject DisconnectPanel;
+    public InputField NicknameInput;
+
     private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else if (instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+
+        Screen.SetResolution(1280, 860, false);
+
+    }
+
+    public void Connect()
     {
         // 같은 룸의 유저들에게 자동으로 씬을 로딩
         PhotonNetwork.AutomaticallySyncScene = true;
         // 같은 버전의 유저끼리 접속 허용
         PhotonNetwork.GameVersion = version;
-        // 유저 아이디 할당
-
-        // 중복 닉네임 방지를 위한 추가 이름
-        foreach (var player in PhotonNetwork.CurrentRoom.Players)
-        {
-            if(player.Value.NickName == userID)
-            {
-                if (name_number == "")
-                    name_number = "1";
-                else
-                    name_number = (Convert.ToInt32(name_number) + 1).ToString();
-            }
-        }
-        PhotonNetwork.NickName = userID + name_number;
 
         // 포톤 서버와 통신 횟수 설정. 초당 30회
         Debug.Log(PhotonNetwork.SendRate);
+
+        // 유저 아이디 할당
+        PhotonNetwork.LocalPlayer.NickName = NicknameInput == null ? userID + name_number : NicknameInput.text;        
         // 서버 접속
         PhotonNetwork.ConnectUsingSettings();
     }
@@ -46,9 +61,10 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     // 포톤 서버에 접속 후 호출되는 콜백 함수
     public override void OnConnectedToMaster()
     {
-        Debug.Log("방장과 연결 완료 !");
-        Debug.Log($"PhotonNetwork.InLobby = {PhotonNetwork.InLobby}");
+        Debug.Log("서버와 연결 완료 !");
+        //Debug.Log($"PhotonNetwork.InLobby = {PhotonNetwork.InLobby}");
         PhotonNetwork.JoinLobby(); // 로비 입장 
+        SceneManager.LoadScene("PhotonLobby");
     }
 
     
@@ -85,7 +101,22 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     // 룸에 입장한 후 호출되는 콜백 함수
     public override void OnJoinedRoom()
     {
-        Debug.Log($"방 입장 완료 : {PhotonNetwork.InRoom}");
+        // 중복 닉네임 방지를 위한 추가 이름
+        foreach (var player in PhotonNetwork.CurrentRoom.Players)
+        {
+            if (player.Value == PhotonNetwork.LocalPlayer)
+                continue;
+            if (player.Value.NickName == PhotonNetwork.LocalPlayer.NickName)
+            {
+                if (name_number == "")
+                    name_number = "1";
+                else
+                    name_number = (Convert.ToInt32(name_number) + 1).ToString();
+            }
+        }
+        PhotonNetwork.LocalPlayer.NickName = PhotonNetwork.LocalPlayer.NickName + name_number;
+        string isMaster = PhotonNetwork.LocalPlayer.IsMasterClient ? "(방장)" : "";
+        Debug.Log(PhotonNetwork.LocalPlayer.NickName + "님" + isMaster + $" 방 입장 완료 : {PhotonNetwork.InRoom}");
         Debug.Log($"플레이어 수 : {PhotonNetwork.CurrentRoom.PlayerCount}");
 
         PhotonGameManager.instance.isConnect = true;
@@ -96,6 +127,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
             // $ => String.Format() : $"" 쌍따옴표 안에 있는 내용을 스트링으로 바꿔어주어라.            
             Debug.Log($"{player.Value.NickName}, {player.Value.ActorNumber}");
         }
+        PhotonNetwork.Instantiate("Prefab/PhotonTest/Player", Vector3.zero, Quaternion.identity);
     }
 
     // Start is called before the first frame update

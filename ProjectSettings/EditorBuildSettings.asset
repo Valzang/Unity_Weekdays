@@ -98,4 +98,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Resources/Scenes/Assignment/#6 MazeRunner/MazeMain.unity
     guid: 32ea6d63c6d06bc4a9e4740a28b36c63
+  - enabled: 1
+    path: Assets/Resources/Scenes/PhotonTest/Scenes/PhotonLauncher.unity
+    guid: 0488ea157ca7d774f945834b24d3b015
+  - enabled: 1
+    path: Assets/Resources/Scenes/PhotonTest/Scenes/PhotonLobby.unity
+    guid: 7ea7fa31580b9f24fbdaefd8f91af355
+  - enabled: 1
+    path: Assets/Resources/Scenes/PhotonTest/Scenes/PhotonMenu.unity
+    guid: ab5e7dd86fba4d04a8fa81a056bc090f
   m_configObjects: {}
