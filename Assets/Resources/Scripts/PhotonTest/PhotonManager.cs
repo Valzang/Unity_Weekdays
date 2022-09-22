@@ -65,15 +65,13 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         //Debug.Log($"PhotonNetwork.InLobby = {PhotonNetwork.InLobby}");
         PhotonNetwork.JoinLobby(); // 로비 입장 
         SceneManager.LoadScene("PhotonLobby");
-    }
-
-    
+    }    
 
     // 로비에 접속 후 호출되는 콜백 함수
     public override void OnJoinedLobby()
     {        
         Debug.Log($"로비 접속 성공 : {PhotonNetwork.InLobby}");
-        PhotonNetwork.JoinRandomRoom(); // 랜덤 매치메이킹 기능 제공
+        //PhotonNetwork.JoinRandomRoom(); // 랜덤 매치메이킹 기능 제공
     }
 
     // 랜덤한 룸 입장이 실패했을 경우 호출되는 콜백 함수
