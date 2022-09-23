@@ -38,7 +38,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
             Destroy(this.gameObject);
         }
 
-        Screen.SetResolution(1280, 860, false);
+        Screen.SetResolution(1920, 1080, true);
 
     }
 
@@ -86,7 +86,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         roomOptions.IsVisible = true;   // 로비에서 룸 목록에 노출시킬지 여부
 
         // 룸 생성
-        PhotonNetwork.CreateRoom("My Room", roomOptions);
+        PhotonNetwork.CreateRoom("My Room", roomOptions);        
     }
 
     // 룸 생성이 완료된 후 호출되는 콜백 함수
@@ -95,6 +95,8 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         Debug.Log("방 생성 완료");
         Debug.Log($"방 이름 : {PhotonNetwork.CurrentRoom.Name}");
     }
+
+    
 
     // 룸에 입장한 후 호출되는 콜백 함수
     public override void OnJoinedRoom()
@@ -117,8 +119,6 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         Debug.Log(PhotonNetwork.LocalPlayer.NickName + "님" + isMaster + $" 방 입장 완료 : {PhotonNetwork.InRoom}");
         Debug.Log($"플레이어 수 : {PhotonNetwork.CurrentRoom.PlayerCount}");
 
-        PhotonGameManager.instance.isConnect = true;
-
         // 룸에 접속한 사용자 정보 확인
         foreach(var player in PhotonNetwork.CurrentRoom.Players)
         {
@@ -128,15 +128,14 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         PhotonNetwork.Instantiate("Prefab/PhotonTest/Player", Vector3.zero, Quaternion.identity);
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public override void OnJoinRoomFailed(short returnCode, string message)
     {
-        
+        Debug.Log($"방 접속에 실패했습니다. {returnCode}:{message}");
+
+        if(SceneManager.GetActiveScene().name == "PhotonLobby")
+        {
+            LobbyUI.instance.gameObject.SetActive(true);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

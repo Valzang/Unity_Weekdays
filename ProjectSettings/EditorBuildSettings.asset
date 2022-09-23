@@ -5,106 +5,106 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/Study/00 Start.unity
     guid: 3320f47aecc1a164ab5f54d590290d2f
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/Study/01 Move&Rotation.unity
     guid: 3ae0d9c459db3454092504e283e4143f
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/Study/02 OnGUI_SceneManagement.unity
     guid: 8e1648e28c1254341b916afa224f5a3e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/Study/03 Game.unity
     guid: 8fdc0af5f7cffe247a3dd435a7418aa9
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/Study/22 GameTitle.unity
     guid: d17bffd08b3bb824b93b243fbe0ab08e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/Study/99 End.unity
     guid: 7d7228554ff6c614381fef68372a9c06
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/Study/04 RayCast.unity
     guid: 9e1e230c074b7a646854987f6e92b90b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/Study/06 Camera.unity
     guid: 8f2e07bbf8fa88e49a51d803985d2590
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/Study/07 LegacyAnimation.unity
     guid: f95eb1ecb186f384f9162dd7415deb15
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/Study/08 2DProj.unity
     guid: 3c996d220fc933045b620a4172d5dd5f
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/Study/09 MecanimAnimation.unity
     guid: 7fa896a307d8f284b915c4b84bc4cc81
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/Study/10 Terrain.unity
     guid: 3190a82daa2b0484ca6ed9f62d81b3df
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/Study/11 Save&Load.unity
     guid: b0703ffae0449b74999d656c12902e53
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/Study/12 LoadingScene.unity
     guid: 5979fd5c24f61124da6e1e1649e74dbc
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/Study/98 UnitTest.unity
     guid: 5197e11809c389a459d17e0a7c5f8a76
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/Assignment/#2 Racing/#2_Race_Circle.unity
     guid: 331e505a45b85ee46a840ae7fc415b94
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/Assignment/#2 Racing/#2_Race_End.unity
     guid: d6b891c0923c2824db49368842858b7e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/Assignment/#2 Racing/#2_Race_Circle_Setting.unity
     guid: 86dbf6ffab8e24b4fb083b4453bef025
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/Assignment/#3 Flappy_Bird/#3_FlappyBird_Setting.unity
     guid: c6327ec1e74a6c44db702407e1a39aa6
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/Assignment/#3 Flappy_Bird/#3_FlappyBird_Game.unity
     guid: ffd9c625cd786b240a3925ef066fcb19
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/Assignment/#3 Flappy_Bird/#3_FlappyBird_Score.unity
     guid: 052905bb2efbd2f4db9927b057a0e4c4
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/Assignment/#4 Spartan/#4_Spartan_Defense.unity
     guid: f233c40e2aefed749afb4c04e5956097
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/Assignment/#4 Spartan/#4_Spartan_Ending.unity
     guid: e89c6f5a5903b90488c59bc303d8819a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/Assignment/#4 Spartan/#4_Spartan_Setting.unity
     guid: 4874a4a8a0de8394cbd15d7c708f0e1f
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/Assignment/#5 2D_Shooting/2D_Login.unity
     guid: e050e017873bb974e9aeda6d630fed49
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/Assignment/#5 2D_Shooting/2D_Shooting.unity
     guid: 3de079bcc7f9c7f42ab78c31ae96a30e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/Assignment/#5 2D_Shooting/2D_Score.unity
     guid: f9069396981bdb144b470eb7e740a020
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/Assignment/#6 MazeRunner/MazeRunner.unity
     guid: 418a06389fab9c5428d23a195806e52d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/Assignment/#6 MazeRunner/Escape.unity
     guid: e896dff985c71424692393d04209dd7e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/Assignment/#6 MazeRunner/MazeMain.unity
     guid: 32ea6d63c6d06bc4a9e4740a28b36c63
   - enabled: 1
-    path: Assets/Resources/Scenes/PhotonTest/Scenes/PhotonLauncher.unity
-    guid: 0488ea157ca7d774f945834b24d3b015
+    path: Assets/Resources/Scenes/PhotonTest/Scenes/PhotonMenu.unity
+    guid: ab5e7dd86fba4d04a8fa81a056bc090f
   - enabled: 1
     path: Assets/Resources/Scenes/PhotonTest/Scenes/PhotonLobby.unity
     guid: 7ea7fa31580b9f24fbdaefd8f91af355
   - enabled: 1
-    path: Assets/Resources/Scenes/PhotonTest/Scenes/PhotonMenu.unity
-    guid: ab5e7dd86fba4d04a8fa81a056bc090f
+    path: Assets/Resources/Scenes/PhotonTest/Scenes/PhotonLauncher.unity
+    guid: 0488ea157ca7d774f945834b24d3b015
   m_configObjects: {}
