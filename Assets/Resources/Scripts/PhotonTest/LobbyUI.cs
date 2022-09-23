@@ -118,7 +118,6 @@ public class LobbyUI : MonoBehaviourPunCallbacks
         }
 
         this.gameObject.SetActive(false);
-        SceneManager.LoadScene("PhotonLauncher");
 
         // 룸의 속성 정의
         RoomOptions roomOptions = new RoomOptions();
@@ -139,7 +138,6 @@ public class LobbyUI : MonoBehaviourPunCallbacks
             if (RoomNameObj.GetComponent<Text>().text == curRoomList[i].Name)
             {
                 this.gameObject.SetActive(false);
-                SceneManager.LoadScene("PhotonLauncher");
                 PhotonNetwork.JoinRoom(RoomNameObj.GetComponent<Text>().text);
                 return;
             }
@@ -157,7 +155,6 @@ public class LobbyUI : MonoBehaviourPunCallbacks
     public void JoinSelectRoom(int num)
     {
         this.gameObject.SetActive(false);
-        SceneManager.LoadScene("PhotonLauncher");
         PhotonNetwork.JoinRoom(RoomList[num].transform.GetChild(0).GetComponent<Text>().text);
     }
 }
