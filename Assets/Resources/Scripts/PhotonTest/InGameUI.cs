@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,17 +10,27 @@ public class InGameUI : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject ChatUI;
     [SerializeField] private GameObject previousChat;
     [SerializeField] private InputField Chat;
-    [SerializeField] private GameObject NickName;
 
     private ScrollRect prev_ScrollRect = null;
+
+    static public InGameUI Instance;
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else if (Instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+
+    }
     void Start()
     {
         prev_ScrollRect = ChatUI.transform.GetChild(0).GetComponent<ScrollRect>();
         PhotonNetwork.IsMessageQueueRunning = true;
-        
-        NickName.GetComponent<Text>().text = PhotonNetwork.LocalPlayer.NickName;
-
-        PhotonNetwork.Instantiate("Prefab/PhotonTest/Player", Vector3.zero, Quaternion.identity);
     }
 
 

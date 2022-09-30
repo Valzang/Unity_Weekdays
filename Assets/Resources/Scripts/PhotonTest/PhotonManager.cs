@@ -53,7 +53,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         Debug.Log(PhotonNetwork.SendRate);
 
         // 유저 아이디 할당
-        PhotonNetwork.LocalPlayer.NickName = NicknameInput == null ? userID : NicknameInput.text;        
+        PhotonNetwork.LocalPlayer.NickName = NicknameInput == null ? userID + name_number : NicknameInput.text;        
         // 서버 접속
         PhotonNetwork.ConnectUsingSettings();
     }
@@ -120,13 +120,12 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         Debug.Log($"플레이어 수 : {PhotonNetwork.CurrentRoom.PlayerCount}");
 
         // 룸에 접속한 사용자 정보 확인
-        foreach (var player in PhotonNetwork.CurrentRoom.Players)
+        foreach(var player in PhotonNetwork.CurrentRoom.Players)
         {
             // $ => String.Format() : $"" 쌍따옴표 안에 있는 내용을 스트링으로 바꿔어주어라.            
             Debug.Log($"{player.Value.NickName}, {player.Value.ActorNumber}");
         }
-
-        SceneManager.LoadScene("PhotonLauncher");
+        PhotonNetwork.Instantiate("Prefab/PhotonTest/Player", Vector3.zero, Quaternion.identity);
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)
