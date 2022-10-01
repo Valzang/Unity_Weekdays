@@ -7,12 +7,14 @@ using Photon.Realtime;
 
 public class InGameUI : MonoBehaviourPunCallbacks
 {
-    [SerializeField] private GameObject ChatUI;
-    [SerializeField] private GameObject previousChat;
-    [SerializeField] private InputField Chat;
+    [SerializeField][Tooltip("채팅 UI")] private GameObject ChatUI;
+    [SerializeField][Tooltip("이전 채팅 내용")] private GameObject previousChat;
+    [SerializeField][Tooltip("닉네임")] private GameObject nickName;
+    [SerializeField][Tooltip("현재 작성 중인 채팅 내용")] private InputField Chat;
 
     private ScrollRect prev_ScrollRect = null;
 
+    /*
     static public InGameUI Instance;
     private void Awake()
     {
@@ -25,11 +27,12 @@ public class InGameUI : MonoBehaviourPunCallbacks
         {
             Destroy(this.gameObject);
         }
-
     }
+    */
     void Start()
     {
         prev_ScrollRect = ChatUI.transform.GetChild(0).GetComponent<ScrollRect>();
+        nickName.GetComponent<Text>().text = PhotonNetwork.LocalPlayer.NickName;
         PhotonNetwork.IsMessageQueueRunning = true;
     }
 
@@ -43,8 +46,6 @@ public class InGameUI : MonoBehaviourPunCallbacks
             else
             {
                 ChatUI.SetActive(true);
-                //Chat.ActivateInputField();
-                //Chat.Select();
             }
         }
         if(ChatUI.activeSelf && Chat.isFocused)

@@ -17,13 +17,12 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     private readonly string version = "1.0";
 
     //사용자 아이디 입력
-    private string userID = "JJCW";
+    private string userID = "익명";
 
     //아이디 겹칠 때를 위한
     private string name_number = "";
 
-    [Header("DisconnectPanel")]
-    //public GameObject DisconnectPanel;
+    [Header("닉네임 입력")]
     public InputField NicknameInput;
 
     private void Awake()
@@ -50,7 +49,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         PhotonNetwork.GameVersion = version;
 
         // 포톤 서버와 통신 횟수 설정. 초당 30회
-        Debug.Log(PhotonNetwork.SendRate);
+        Debug.Log("서버와의 초당 통신 횟수 : " + PhotonNetwork.SendRate);
 
         // 유저 아이디 할당
         PhotonNetwork.LocalPlayer.NickName = NicknameInput == null ? userID + name_number : NicknameInput.text;        
@@ -62,7 +61,6 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         Debug.Log("서버와 연결 완료 !");
-        //Debug.Log($"PhotonNetwork.InLobby = {PhotonNetwork.InLobby}");
         PhotonNetwork.JoinLobby(); // 로비 입장 
         SceneManager.LoadScene("PhotonLobby");
     }    
@@ -81,7 +79,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
         // 룸의 속성 정의
         RoomOptions roomOptions = new RoomOptions();
-        roomOptions.MaxPlayers = 20;    // 최대 접속자수, 포톤 무료는 20CCU이므로 20 초과로는 못한다.
+        roomOptions.MaxPlayers = 2;    // 최대 접속자수, 포톤 무료는 20CCU이므로 20 초과로는 못한다.
         roomOptions.IsOpen = true;      // 룸의 오픈 여부
         roomOptions.IsVisible = true;   // 로비에서 룸 목록에 노출시킬지 여부
 
@@ -114,9 +112,9 @@ public class PhotonManager : MonoBehaviourPunCallbacks
                     name_number = (Convert.ToInt32(name_number) + 1).ToString();
             }
         }
-        PhotonNetwork.LocalPlayer.NickName = PhotonNetwork.LocalPlayer.NickName + name_number;
+        PhotonNetwork.LocalPlayer.NickName += name_number;
         string isMaster = PhotonNetwork.LocalPlayer.IsMasterClient ? "(방장)" : "";
-        Debug.Log(PhotonNetwork.LocalPlayer.NickName + "님" + isMaster + $" 방 입장 완료 : {PhotonNetwork.InRoom}");
+        Debug.Log(isMaster + PhotonNetwork.LocalPlayer.NickName + "님" + $" 방 입장 완료 : {PhotonNetwork.InRoom}");
         Debug.Log($"플레이어 수 : {PhotonNetwork.CurrentRoom.PlayerCount}");
 
         // 룸에 접속한 사용자 정보 확인
@@ -125,7 +123,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
             // $ => String.Format() : $"" 쌍따옴표 안에 있는 내용을 스트링으로 바꿔어주어라.            
             Debug.Log($"{player.Value.NickName}, {player.Value.ActorNumber}");
         }
-        PhotonNetwork.Instantiate("Prefab/PhotonTest/Player", Vector3.zero, Quaternion.identity);
+        StartCoroutine(nameof(MakeChar));
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)
@@ -136,6 +134,13 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         {
             LobbyUI.instance.gameObject.SetActive(true);
         }
+    }
+
+    IEnumerator MakeChar()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        PhotonNetwork.Instantiate("Prefab/PhotonTest/Player", Vector3.zero, Quaternion.identity);
     }
 
 }
