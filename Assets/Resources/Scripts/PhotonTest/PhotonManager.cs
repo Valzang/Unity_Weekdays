@@ -17,7 +17,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     private readonly string version = "1.0";
 
     //사용자 아이디 입력
-    private string userID = "익명";
+    private string userID = "JJCW";
 
     //아이디 겹칠 때를 위한
     private string name_number = "";

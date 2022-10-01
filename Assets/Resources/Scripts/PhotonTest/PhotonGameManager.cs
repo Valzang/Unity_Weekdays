@@ -23,15 +23,21 @@ public class PhotonGameManager : MonoBehaviour
         }
     }
 
-    //void Start()
-    //{
-    //    //StartCoroutine(CreatePlayer());
-    //}
-    //
-    //IEnumerator CreatePlayer()
-    //{
-    //    yield return new WaitUntil(() => isConnect);
-    //
-    //    GameObject playerTemp = PhotonNetwork.Instantiate("Prefab/PhotonTest/Player", Vector3.zero, Quaternion.identity, 0);
-    //}
+    void Start()
+    {
+        //StartCoroutine(CreatePlayer());
+    }
+
+
+    void Update()
+    {
+        
+    }
+
+    IEnumerator CreatePlayer()
+    {
+        yield return new WaitUntil(() => isConnect);
+
+        GameObject playerTemp = PhotonNetwork.Instantiate("Prefab/PhotonTest/Player", Vector3.zero, Quaternion.identity, 0);
+    }
 }
