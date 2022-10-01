@@ -25,6 +25,8 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     [Header("닉네임 입력")]
     public InputField NicknameInput;
 
+    [HideInInspector] public bool isFull = false;
+
     private void Awake()
     {
         if (instance == null)
@@ -99,6 +101,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     // 룸에 입장한 후 호출되는 콜백 함수
     public override void OnJoinedRoom()
     {
+        SceneManager.LoadScene("PhotonLauncher");
         // 중복 닉네임 방지를 위한 추가 이름
         foreach (var player in PhotonNetwork.CurrentRoom.Players)
         {
@@ -133,12 +136,15 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         if(SceneManager.GetActiveScene().name == "PhotonLobby")
         {
             LobbyUI.instance.gameObject.SetActive(true);
+            LobbyUI.instance.WarningObj.SetActive(true);
+            LobbyUI.instance.WarningObj.transform.GetChild(1).gameObject.GetComponent<Text>().text = "접속할 수 없는 방입니다 !";
+
         }
     }
 
     IEnumerator MakeChar()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
 
         PhotonNetwork.Instantiate("Prefab/PhotonTest/Player", Vector3.zero, Quaternion.identity);
     }

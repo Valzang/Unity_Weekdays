@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 333127756}
   - component: {fileID: 333127755}
   - component: {fileID: 333127754}
+  - component: {fileID: 333127757}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -207,6 +208,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &333127757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 333127753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!1 &1269656105
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,6 +271,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NicknameInput: {fileID: 0}
+  isFull: 0
 --- !u!4 &1269656108
 Transform:
   m_ObjectHideFlags: 0
@@ -442,6 +477,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3340072164910065772, guid: 92d011094ed11424bbc3c896a939fad9,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3340072165271874474, guid: 92d011094ed11424bbc3c896a939fad9,
+        type: 3}
+      propertyPath: m_Name
+      value: FindRoom
+      objectReference: {fileID: 0}
+    - target: {fileID: 3340072165271874477, guid: 92d011094ed11424bbc3c896a939fad9,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3340072165319259110, guid: 92d011094ed11424bbc3c896a939fad9,
+        type: 3}
+      propertyPath: m_Name
+      value: FindRoom
+      objectReference: {fileID: 0}
     - target: {fileID: 3340072165460546510, guid: 92d011094ed11424bbc3c896a939fad9,
         type: 3}
       propertyPath: m_Name
@@ -550,6 +605,11 @@ PrefabInstance:
     - target: {fileID: 3340072165460546515, guid: 92d011094ed11424bbc3c896a939fad9,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3340072166595214888, guid: 92d011094ed11424bbc3c896a939fad9,
+        type: 3}
+      propertyPath: m_RaycastTarget
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
